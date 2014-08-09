@@ -9,3 +9,4 @@ Thumbs.db
 /node_modules
 *.sublime-project
 *.sublime-workspace
+/app/config/local/database.php
