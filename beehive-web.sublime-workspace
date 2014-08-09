@@ -1,0 +1,464 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"t",
+				"td	<td>"
+			],
+			[
+				"html",
+				"html	html"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/views/hello.blade.php",
+			"settings":
+			{
+				"buffer_size": 279,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/database/migrations/2014_08_09_195312_init_tables.php",
+			"settings":
+			{
+				"buffer_size": 1297,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/donkeysharp/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 624,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 375.0,
+		"selected_items":
+		[
+			[
+				"",
+				":$ - EOF"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"delete",
+				"File: Delete"
+			],
+			[
+				"show",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"php	",
+				"Set Syntax: PHP"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"show error",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"html",
+				"Set Syntax: HTML5"
+			],
+			[
+				"gitcom",
+				"Git: Commit"
+			],
+			[
+				"gutter",
+				"GitGutter: Compare Against HEAD"
+			],
+			[
+				"git com",
+				"Git: Commit"
+			],
+			[
+				"new file",
+				"ANF: New File"
+			],
+			[
+				"scss",
+				"Set Syntax: SCSS"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"enabe",
+				"Package Control: Enable Package"
+			],
+			[
+				"show err",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"docty",
+				"Snippet: DOCTYPE HTML"
+			],
+			[
+				"html5",
+				"Set Syntax: HTML5"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"javascr",
+				"Set Syntax: JavaScript"
+			]
+		],
+		"width": 462.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/donkeysharp/.config/sublime-text-3/Packages/User/PHP.sublime-settings",
+		"/home/donkeysharp/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/donkeysharp/code/repos/beehive/beehive-web/app/database/migrations/2014_08_09_195312_init_tables.php",
+		"/home/donkeysharp/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/donkeysharp/code/repos/beehive/beehive-web/app/database/migrations/.gitkeep",
+		"/home/donkeysharp/code/repos/beehive/beehive-web/app/config/mail.php",
+		"/home/donkeysharp/code/repos/beehive/beehive-web/app/controllers/HomeController.php",
+		"/home/donkeysharp/code/repos/beehive/beehive-web/app/views/hello.blade.php",
+		"/home/donkeysharp/.config/sublime-text-3/Packages/User/laravel-blade.sublime-settings",
+		"/home/donkeysharp/code/repos/beehive/beehive-web/app/views/hello.php",
+		"/home/donkeysharp/code/repos/beehive/beehive-web/app/controllers/BaseController.php",
+		"/home/donkeysharp/code/repos/pizarron/.gitattributes",
+		"/home/donkeysharp/code/repos/pizarron/.gitignore",
+		"/home/donkeysharp/code/repos/pizarron/app/routes.php",
+		"/home/donkeysharp/code/repos/pizarron/readme.md",
+		"/home/donkeysharp/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/home/donkeysharp/code/repos/pizarron/app/controllers/HomeController.php",
+		"/home/donkeysharp/code/repos/pizarron/Gruntfile.js",
+		"/home/donkeysharp/code/repos/pizarron/public/assets/css/general.css",
+		"/home/donkeysharp/code/repos/pizarron/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php",
+		"/home/donkeysharp/code/repos/pizarron/app/config/view.php",
+		"/home/donkeysharp/code/repos/pizarron/vendor/symfony/finder/Symfony/Component/Finder/Expression/ValueInterface.php",
+		"/home/donkeysharp/code/repos/pizarron/.sass-cache/dbd2e8f352778896c6fc3c9f3bb3088ebf8f75d9/variables.scssc",
+		"/home/donkeysharp/code/repos/pizarron/node_modules/grunt-contrib-watch/node_modules/tiny-lr/node_modules/noptify/actions/commandable.js",
+		"/home/donkeysharp/code/repos/pizarron/node_modules/grunt-contrib-uglify/node_modules/uglify-js/lib/ast.js",
+		"/home/donkeysharp/code/repos/pizarron/app/controllers/CourseController.php",
+		"/home/donkeysharp/code/repos/pizarron/app/controllers/ComposerHelper.php",
+		"/home/donkeysharp/code/repos/pizarron/app/controllers/BaseController.php",
+		"/home/donkeysharp/code/repos/pizarron/app/controllers/.gitkeep",
+		"/home/donkeysharp/code/repos/pizarron/vendor/laravel/framework/src/Illuminate/Routing/ControllerServiceProvider.php",
+		"/home/donkeysharp/code/repos/pizarron/vendor/laravel/framework/src/Illuminate/Routing/Controller.php",
+		"/home/donkeysharp/code/repos/pizarron/CONTRIBUTING.md",
+		"/home/donkeysharp/code/repos/pizarron/node_modules/grunt-contrib-clean/docs/clean-options.md",
+		"/home/donkeysharp/code/repos/pizarron/app/storage/views/0b3ac771a4474aca4d0c8f08ab4c4dce",
+		"/home/donkeysharp/code/repos/pizarron/app/storage/views/.gitignore",
+		"/home/donkeysharp/code/repos/pizarron/app/views/master.blade.php",
+		"/home/donkeysharp/code/repos/pizarron/app/views/error.php",
+		"/home/donkeysharp/code/repos/pizarron/app/config/app.php",
+		"/home/donkeysharp/code/repos/pizarron/frontend/js/admin-panel.js",
+		"/home/donkeysharp/code/repos/pizarron/artisan",
+		"/home/donkeysharp/code/repos/pizarron/app/views/partials/navbar.blade.php",
+		"/home/donkeysharp/code/repos/pizarron/vendor/laravel/framework/src/Illuminate/Support/Facades/Blade.php",
+		"/home/donkeysharp/code/repos/pizarron/vendor/phpseclib/phpseclib/phpseclib/Crypt/Blowfish.php",
+		"/home/donkeysharp/code/repos/pizarron/vendor/bin/boris",
+		"/home/donkeysharp/code/repos/pizarron/phpunit.xml",
+		"/home/donkeysharp/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"complete",
+			"save",
+			"php",
+			"comment",
+			"	\"",
+			">",
+			"\n	"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/views/hello.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 279,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								243,
+								243
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Brogrammer (SL).tmTheme",
+							"is_xml": false,
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/database/migrations/2014_08_09_195312_init_tables.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1297,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1161,
+								1161
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Brogrammer (SL).tmTheme",
+							"is_xml": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 395.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/donkeysharp/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 624,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								261,
+								261
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Brogrammer (SL).tmTheme",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 124.0
+	},
+	"project": "beehive-web.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"migration",
+				"app/database/migrations/2014_08_09_195312_init_tables.php"
+			],
+			[
+				"migrations/init",
+				"app/database/migrations/2014_08_09_195312_init_tables.php"
+			],
+			[
+				"hello.bla",
+				"app/views/hello.blade.php"
+			],
+			[
+				"hello.php",
+				"app/views/hello.php"
+			],
+			[
+				"routes",
+				"app/routes.php"
+			],
+			[
+				"controllers/",
+				"app/controllers/HomeController.php"
+			],
+			[
+				"views/",
+				"app/views/partials/navbar.blade.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 375.0,
+		"selected_items":
+		[
+			[
+				"",
+				"registered"
+			]
+		],
+		"width": 444.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 254.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

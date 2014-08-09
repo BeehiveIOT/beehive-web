@@ -1,0 +1,13 @@
+{
+	"folders":
+	[
+		{
+			"folder_exclude_patterns":
+			[
+				"vendor"
+			],
+			"follow_symlinks": true,
+			"path": "."
+		}
+	]
+}
