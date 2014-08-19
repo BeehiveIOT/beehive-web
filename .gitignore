@@ -7,6 +7,6 @@ composer.lock
 .DS_Store
 Thumbs.db
 /node_modules
-*.sublime-project
 *.sublime-workspace
+*.sublime-project
 /app/config/local/database.php

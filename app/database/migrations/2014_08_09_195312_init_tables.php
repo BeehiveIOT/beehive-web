@@ -93,11 +93,11 @@ class InitTables extends Migration {
 		Schema::create('device_admin', function($t) {
 			$t->increments('id');
 			$t->integer('user_id')->unsigned();
-			$t->integer('device_id')->unsigned();
+			$t->integer('device_instance_id')->unsigned();
 			$t->timestamps();
 
 			$t->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-			$t->foreign('device_id')->references('id')->on('device_instances')->onDelete('cascade');
+			$t->foreign('device_instance_id')->references('id')->on('device_instances')->onDelete('cascade');
 		});
 	}
 
