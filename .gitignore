@@ -1,3 +1,4 @@
+# laravel default
 /bootstrap/compiled.php
 /vendor
 composer.phar
@@ -6,7 +7,17 @@ composer.lock
 .env.php
 .DS_Store
 Thumbs.db
-/node_modules
-*.sublime-workspace
-*.sublime-project
+
+# local config
 /app/config/local/database.php
+
+# nodejs stuff
+/node_modules
+
+# frontend stuff
+/public/assets/css/*.css
+/public/assets/js/*.js
+
+# Sublime stuff
+*.sublime-project
+*.sublime-workspace

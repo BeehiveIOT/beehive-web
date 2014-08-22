@@ -1,25 +1,46 @@
-## Laravel PHP Framework
+Beehive-web
+===========
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Web application and REST API for the Beehive platform
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+# Front-end development (Structure)
+frontend
+|--- css (all scss files)
+|--- js
+     |--- module 1
+     |--- module 2
+     |--- module n
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+All scss will be compiled and concatenated and copied to public/assets/css
+All javascript files for each module will be concatenated and copied to public/assets/js as public/assets/js/module1.min.js public/assets/js/module2.min.js, etc.
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+For vendor libraries such as angularjs, bootstrap, jquery, etc. They will be included in public/assets/vendors/[css|js|img|fonts]
 
-## Official Documentation
+# Front-end development (Requirements)
++ NodeJS and Node Package Manager installed
++ Global Grunt installed
++ Sass and Compass
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+In order to install dependencies run:
+###
+$ npm install
+###
 
-### Contributing To Laravel
+For development, you must configure Gruntfile.js. In order to execute tasks for compile, watch, etc. run:
+###
+$ grunt
+###
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
+# Run the application
+As the web application runs over Laravel, you must have installed composer. To install all Laravel and required libraries run:
+###
+$ composer install
+###
 
-### License
+To run the application in Laravel's testing server run:
+###
+$ ./artisan serve
+###
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+# Set Environment
+This application reads "LARAVEL_ENV" environment variable and by default it is set to "local", so you must create local configurations i.e. app/config/local/[app.php, database.php, etc.]
