@@ -21,6 +21,13 @@ module.exports = function(grunt) {
         ],
         dest: './public/assets/js/frontpage.js'
       },
+      upload: {
+        src: ['./frontend/js/upload/jquery.ui.widget.js',
+        './frontend/js/upload/jquery.iframe-trasnport.js',
+        './frontend/js/upload/jquery.fileupload.js'
+        ],
+        dest: './public/assets/js/upload.js'
+      }
     },
     /**
      * Compiles all stylesheets in different files in public/assets/css

@@ -11,14 +11,22 @@ class InitTables extends Migration {
 	 * @return void
 	 */
 	public function up() {
+		Schema::create('countries', function($t) {
+			$t->increments('id');
+			$t->string('code');
+			$t->string('name');
+			$t->timestamps();
+		});
 		Schema::create('users', function($t) {
 			$t->increments('id');
 			$t->string('name');
+			$t->string('username')->unique();
 			$t->string('email')->unique();
 			$t->string('password');
-			$t->string('picture_url');
-			$t->string('remember_token')->nullable();
 			$t->string('country');
+			$t->string('website')->nullable();
+			$t->string('picture_url')->default('user.png');
+			$t->string('remember_token')->nullable();
 			$t->timestamps();
 		});
 		Schema::create('organizations', function($t) {
@@ -107,6 +115,7 @@ class InitTables extends Migration {
 	 * @return void
 	 */
 	public function down() {
+		Schema::drop('countries');
 		Schema::drop('device_admin');
 		Schema::drop('device_instances');
 		Schema::drop('containers');

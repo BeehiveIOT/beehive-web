@@ -1,0 +1,59 @@
+@import '_variables';
+
+body {
+  background-color: #EDEDED
+}
+.wrapper {
+  margin: 70px 16px 10px 16px;
+}
+
+.message-log {
+  position:fixed;
+  bottom: 0;
+  right: 0;
+}
+
+/*
+ * Form control shadow modification
+ */
+.form-control:focus {
+  border-color: $form-control-border;
+
+  -webkit-box-shadow: inset 0 1px 1px $form-control-border-from, 0 0 8px $form-control-border-to;
+  box-shadow: inset 0 1px 1px $form-control-border-from, 0 0 8px $form-control-border-to;
+  outline: 0;
+}
+.form-control[disabled],
+.form-control[readonly],
+// Change disabled control background
+fieldset[disabled] .form-control {
+  cursor: not-allowed;
+  background-color: #f7f7f7;
+  opacity: 1;
+}
+// For async file upload
+.fileinput-button {
+  position: relative;
+  input {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    direction: ltr;
+    cursor: pointer;
+  }
+}
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button {
+    input {
+      filter: alpha(opacity=0);
+      font-size: 100%;
+      height: 100%;
+    }
+  }
+}

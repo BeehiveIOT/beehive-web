@@ -7,11 +7,14 @@ composer.lock
 .env.php
 .DS_Store
 Thumbs.db
+# uploads
+/public/uploads/avatars/*
 
 # local config
 /app/config/local/database.php
 
 # nodejs stuff
+/.sass-cache
 /node_modules
 
 # frontend stuff

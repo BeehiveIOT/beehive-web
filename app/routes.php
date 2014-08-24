@@ -11,7 +11,22 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', ['uses'=>'HomeController@index']);
+Route::get('login', ['uses'=>'HomeController@login']);
+Route::post('login', ['uses'=>'HomeController@doLogin']);
+Route::post('logout', ['uses'=>'HomeController@doLogout']);
+Route::get('register', ['uses'=>'HomeController@register']);
+Route::post('register', ['uses'=>'HomeController@doRegister']);
+
+Route::group(['before'=>'auth'], function() {
+    Route::get('dashboard', ['uses'=>'DashboardController@index']);
+    Route::get('profile', ['uses'=>'UserController@index']);
+    Route::get('profile/edit', ['uses'=>'UserController@edit']);
+    Route::post('profile/edit', ['uses'=>'UserController@doEdit']);
+    Route::post('profile/changepassword', ['uses'=>'UserController@doChangePassword']);
+    Route::get('user/{username}', ['uses'=>'UserController@get']);
+    Route::post('profile/upload', ['uses' => 'UserController@uploadImage']);
 });
+
+
+View::composer('profile.edit', 'ViewHelper@getCountries');
