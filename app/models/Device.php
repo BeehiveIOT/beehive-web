@@ -3,11 +3,11 @@ class Device extends Eloquent {
     protected $table = 'devices';
 
     /**
-     * Returns the owner organization
+     * Returns the owner user
      * @return Eloquent belongs to relation
      */
-    public function organization() {
-        return $this->belongsTo('Organization');
+    public function user() {
+        return $this->belongsTo('User');
     }
 
     /**

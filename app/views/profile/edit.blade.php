@@ -4,57 +4,64 @@
 <div class="row">
   <div class="col-md-5 col-md-offset-2">
     <div class="panel panel-dark">
-    <div class="panel-heading"><b>Basic Information</b></div>
-    <div class="panel-body">
-      {{Form::open()}}
-      <div class="form-group">
-        {{Form::label('username', 'Username')}}
-        {{Form::text('username', $model->username, [
-          'class'=>'form-control',
-          'disabled'=>'true',
-          'autocomplete'=>'off'
-        ])}}
+      <div class="panel-heading"><b>Basic Information</b></div>
+      <div class="panel-body">
+        {{Form::open()}}
+        <div class="form-group">
+          {{Form::label('username', 'Username')}}
+          {{Form::text('username', $model->username, [
+            'class'=>'form-control',
+            'disabled'=>'true',
+            'autocomplete'=>'off'
+          ])}}
+        </div>
+        <div class="form-group">
+          {{Form::label('email', 'Email')}}
+          {{Form::email('email', $model->email, [
+            'class'=>'form-control',
+            'placeholder'=>'e.g. foo@bar.com',
+            'disabled'=>'true',
+            'autocomplete'=>'off'
+          ])}}
+        </div>
+        <div class="form-group">
+          {{Form::label('name', 'Name')}}
+          {{Form::text('name', $model->name, [
+            'class'=>'form-control',
+            'placeholder'=>'John Smith',
+            'autocomplete'=>'off'
+          ])}}
+        </div>
+        <div class="form-group">
+          {{Form::label('country', 'Country')}}
+          {{Form::select('country', $countries, $model->country, [
+            'class'=>'form-control'
+          ])}}
+        </div>
+        <div class="form-group">
+          {{Form::label('organization', 'Organization')}}
+          {{Form::text('organization', $model->organization, [
+            'class'=>'form-control',
+            'placeholder'=>'e.g. Umbrella',
+            'autocomplete'=>'off'
+          ])}}
+        </div>
+        <div class="form-group">
+          {{Form::label('website', 'Website')}}
+          {{Form::text('website', $model->website, [
+            'class'=>'form-control',
+            'placeholder'=>'http://example.com',
+            'autocomplete'=>'off'
+          ])}}
+        </div>
+        <div class="form-group">
+          {{Form::submit('Save Changes', [
+            'class'=>'btn btn-light btn-block'
+          ])}}
+        </div>
+        {{Form::close()}}
       </div>
-      <div class="form-group">
-        {{Form::label('email', 'Email')}}
-        {{Form::email('email', $model->email, [
-          'class'=>'form-control',
-          'placeholder'=>'e.g. foo@bar.com',
-          'disabled'=>'true',
-          'autocomplete'=>'off'
-        ])}}
-      </div>
-      <div class="form-group">
-        {{Form::label('name', 'Name')}}
-        {{Form::text('name', $model->name, [
-          'class'=>'form-control',
-          'placeholder'=>'John Smith',
-          'autocomplete'=>'off'
-        ])}}
-      </div>
-      <div class="form-group">
-        {{Form::label('country', 'Country')}}
-        {{Form::select('country', $countries, $model->country, [
-          'class'=>'form-control'
-        ])}}
-      </div>
-      <div class="form-group">
-        {{Form::label('website', 'Website')}}
-        {{Form::text('website', $model->website, [
-          'class'=>'form-control',
-          'placeholder'=>'http://example.com',
-          'autocomplete'=>'off'
-        ])}}
-      </div>
-      <div class="form-group">
-        {{Form::submit('Save Changes', [
-          'class'=>'btn btn-light btn-block'
-        ])}}
-      </div>
-      {{Form::close()}}
     </div>
-    </div>
-
   </div>
   <div class="col-md-3">
     <div class="panel panel-dark profile-upload">
@@ -122,6 +129,7 @@ $(document).ready(function() {
           tpl += '&times;</button>';
           tpl += 'Picture updated successfully</div>';
           $('#avatar').attr('src', '/uploads/avatars/' + data.result.fileName);
+          $('#navbar-profile').attr('src', '/uploads/avatars/' + data.result.fileName);
           $('#messages').append(tpl);
         }
       },

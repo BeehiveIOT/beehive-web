@@ -9,4 +9,14 @@ class ViewHelper {
         }
         $view->with('countries', $options);
     }
+
+    public static function avatar($image) {
+        return asset("uploads/avatars/$image");
+    }
+
+    public static function country($code) {
+        $country = Country::where('code', '=', $code)->get()->first();
+
+        return $country ? $country->name : 'Bolivia';
+    }
 }

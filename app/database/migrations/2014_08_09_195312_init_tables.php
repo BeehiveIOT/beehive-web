@@ -24,27 +24,11 @@ class InitTables extends Migration {
 			$t->string('email')->unique();
 			$t->string('password');
 			$t->string('country');
+			$t->string('organization')->nullable();
 			$t->string('website')->nullable();
 			$t->string('picture_url')->default('user.png');
 			$t->string('remember_token')->nullable();
 			$t->timestamps();
-		});
-		Schema::create('organizations', function($t) {
-			$t->increments('id');
-			$t->string('name')->unique();
-			$t->string('description', 500);
-			$t->string('picture_url');
-			$t->timestamps();
-		});
-		Schema::create('organization_admin', function($t) {
-			$t->increments('id');
-			$t->integer('user_id')->unsigned();
-			$t->integer('organization_id')->unsigned();
-			$t->timestamps();
-
-			$t->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-			$t->foreign('organization_id')
-				->references('id')->on('organizations')->onDelete('cascade');
 		});
 		Schema::create('devices', function($t) {
 			$t->increments('id');
@@ -52,11 +36,11 @@ class InitTables extends Migration {
 			$t->string('description');
 			$t->string('picture_url');
 			$t->string('communication_type');
-			$t->integer('organization_id')->unsigned()->nullable();
+			$t->integer('user_id')->unsigned()->nullable();
 			$t->timestamps();
 
-			$t->foreign('organization_id')
-				->references('id')->on('organizations')->onDelete('set null');
+			$t->foreign('user_id')
+				->references('id')->on('users')->onDelete('set null');
 		});
 		Schema::create('commands', function($t) {
 			$t->increments('id');
@@ -122,8 +106,6 @@ class InitTables extends Migration {
 		Schema::drop('arguments');
 		Schema::drop('commands');
 		Schema::drop('devices');
-		Schema::drop('organization_admin');
-		Schema::drop('organizations');
 		Schema::drop('users');
 	}
 

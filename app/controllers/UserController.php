@@ -36,6 +36,7 @@ class UserController extends BaseController {
         $user->name = Input::get('name');
         $user->country = Input::get('country');
         $user->website = Input::get('website');
+        $user->organization = Input::get('organization');
         $user->save();
 
         return Redirect::to('profile/edit')

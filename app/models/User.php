@@ -24,11 +24,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $hidden = array('password', 'remember_token');
 
 	/**
-	 * Returns the organizations in which user is admin
-	 * @return Eloquent many to many relation
+	 * Returns the device models the user has created
+	 * @return Eloquent has many relation
 	 */
-	public function organizations() {
-		return $this->belongsToMany('Organization', 'organization_admin');
+	public function deviceModels() {
+		return $this->hasMany('Device');
 	}
 
 	/**

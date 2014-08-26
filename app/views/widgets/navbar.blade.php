@@ -31,13 +31,13 @@
           <li><a href="#">Manage Devices</a></li>
           <li><a href="#">Manage Containers</a></li>
           <li class="divider"></li>
-          <li><a href="#">Manage Organizations</a></li>
+          <li><a href="{{url('organization')}}">Manage Organizations</a></li>
         </ul>
       </li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <!-- <img src="asd.png" width="35px" height="35px"> -->
-          donkeysharp
+          <img id="navbar-profile" src="{{ViewHelper::avatar(Auth::user()->picture_url)}}" width="35px" height="35px" class='img-circle'>
+          {{--Auth::user()->username--}}
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">

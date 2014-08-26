@@ -6,3 +6,42 @@
     border: 1px #7C7C7C solid;
   }
 }
+
+.profile {
+  .avatar-container {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+    span {
+      font-size: 17px;
+    }
+
+    a {
+      font-size: 16px;
+    }
+
+    h3 {
+      margin-top: 5px;
+    }
+
+    .mail {
+      font-size: 20px;
+    }
+
+    img {
+      width: 140px;
+      height: 140px;
+    }
+  }
+
+  .panel-body {
+    position: relative;
+
+    .edit-option {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  }
+}
