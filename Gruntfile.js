@@ -4,7 +4,8 @@ module.exports = function(grunt) {
     // Cleans everything on public assets folder
     clean: {
       main: ['./public/assets/js', './public/assets/css'],
-      css: ['./public/assets/css/main.css']
+      css: ['./public/assets/css/main.css'],
+      js: ['./public/assets/js']
     },
     /**
      * All javascripts are concatenated in one main.js file
@@ -21,12 +22,9 @@ module.exports = function(grunt) {
         ],
         dest: './public/assets/js/frontpage.js'
       },
-      upload: {
-        src: ['./frontend/js/upload/jquery.ui.widget.js',
-        './frontend/js/upload/jquery.iframe-trasnport.js',
-        './frontend/js/upload/jquery.fileupload.js'
-        ],
-        dest: './public/assets/js/upload.js'
+      deviceEdit: {
+        src: ['./frontend/js/device-edit/*.js'],
+        dest: './public/assets/js/device-edit.js'
       }
     },
     /**
@@ -91,8 +89,8 @@ module.exports = function(grunt) {
           './frontend/js/**/*.js'
         ],
         // as this is not a single page application, I prefer to only copy files
-        tasks: ['concat'
-                ,'uglify:modules'],
+        tasks: ['clean:js','concat',
+                'uglify:modules'],
         options: {
           livereload: false
         }
