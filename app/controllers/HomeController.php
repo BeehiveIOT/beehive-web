@@ -19,7 +19,7 @@ class HomeController extends BaseController {
 		if (Auth::attempt(['username'=>Input::get('username'),
 			'password' =>Input::get('password')])) {
 
-			return Redirect::to('/');
+			return Redirect::intended('/');
 		}
 		return Redirect::to('login')
 			->with('error', 'Invalid credentials');
