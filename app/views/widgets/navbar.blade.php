@@ -13,9 +13,6 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Link</a></li>
       <li><a href="#">Link</a></li>
-    @if (Auth::check())
-
-    @endif
     </ul>
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
@@ -26,16 +23,16 @@
     <ul class="nav navbar-nav navbar-right">
       @if (Auth::check())
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <b class="caret"></b></a>
+        <a href="" class="dropdown-toggle" data-toggle="dropdown">Actions <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="#">Manage Devices</a></li>
           <li><a href="#">Manage Containers</a></li>
           <li class="divider"></li>
-          <li><a href="{{url('organization')}}">Manage Organizations</a></li>
+          <li><a href="{{url('models/create')}}">Add New Device Model</a></li>
         </ul>
       </li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <a href="" class="dropdown-toggle" data-toggle="dropdown">
           <img id="navbar-profile" src="{{ViewHelper::avatar(Auth::user()->picture_url)}}" width="35px" height="35px" class='img-circle'>
           {{--Auth::user()->username--}}
           <b class="caret"></b>
