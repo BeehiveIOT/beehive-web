@@ -1,0 +1,26 @@
+<div class="panel panel-dark">
+  <div class="panel-heading"><b>Device Model Information</b></div>
+  <div class="panel-body">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="hidden" name="id" ng-model="id">
+      <input class="form-control" placeholder="e.g. The X-33 model"
+        autocomplete="off" name="name" type="text" id="name" ng-model="name">
+    </div>
+    <div class="form-group">
+      <label for="communication_type" ng-model="communicationType">
+        Communication Types
+      </label>
+      <select name="communication_type" class="form-control">
+        <option value="{{c.code}}" ng-repeat="c in communication_types">{{c.name}}</option>
+      </select>
+      <label for="description">Description</label>
+      <textarea class="form-control" name="description" ng-model="description"
+        cols="50" rows="10" id="description"></textarea>
+    </div>
+    <div class="form-group">
+      <button ng-disabled="sending" class="btn btn-light btn-block"
+        ng-click="save()">Save Changes</button>
+    </div>
+  </div>
+</div>

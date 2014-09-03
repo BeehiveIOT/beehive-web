@@ -1,0 +1,22 @@
+<div class="panel panel-dark">
+  <div class="panel-heading"><b>Command Information</b></div>
+  <div class="panel-body">
+    <input type="hidden" ng-model="id">
+    <div class="form-group">
+      <label for="name">Command Name</label>
+      <input name="name" class="form-control" ng-model="name"
+        placeholder="e.g. Make me a sandwich">
+    </div>
+    <div class="form-group">
+      <label for="short_cmd">Short Command</label>
+      <input name="short_cmd" class="form-control" ng-model="short_cmd"
+        placeholder="e.g. mmas">
+    </div>
+    <div class="form-group">
+      <input ng-disabled="{{!saveEnabled}}" type="submit"
+        class="btn btn-light btn-block" value="Save Changes">
+    </div>
+    <hr ng-show="{{id}}">
+
+  </div>
+</div>

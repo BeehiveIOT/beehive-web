@@ -15,17 +15,14 @@
   <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
   @yield('styles')
 </head>
-<body>
+<body ng-app="beehive">
 
 @include('widgets.navbar')
 
 <div class="wrapper">
   @yield('content')
 </div>
-@if($errors->has())
-
-@endif
-<div class="message-log" id="messages">
+<div class="message-log" id="messages" my-messages>
 @if($errors->has())
   <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">

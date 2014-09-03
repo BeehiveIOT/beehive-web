@@ -10,6 +10,16 @@ class ViewHelper {
         $view->with('countries', $options);
     }
 
+    public function getCommunicationTypes($view) {
+        $types = CommunicationType::all();
+        if (count($types) > 0) {
+            $options = array_combine($types->lists('code'), $types->lists('name'));
+        } else {
+            $options = array(null, 'No Communication Types');
+        }
+        $view->with('communication_types', $options);
+    }
+
     public static function avatar($image) {
         return asset("uploads/avatars/$image");
     }

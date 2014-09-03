@@ -26,7 +26,14 @@ Route::group(['before'=>'auth'], function() {
     Route::post('profile/changepassword', ['uses'=>'UserController@doChangePassword']);
     Route::get('user/{username}', ['uses'=>'UserController@get']);
     Route::post('profile/upload', ['uses' => 'UserController@uploadImage']);
+
+    Route::get('models/{id}/json', ['uses'=>'DeviceController@getJson']);
+    Route::get('models/create', ['uses'=>'DeviceController@create']);
+    Route::post('models', ['uses'=>'DeviceController@doCreate']);
+    Route::get('models/{id}/edit', ['uses'=>'DeviceController@edit']);
+    Route::put('models/{id}', ['uses'=>'DeviceController@doEdit']);
 });
 
 
 View::composer('profile.edit', 'ViewHelper@getCountries');
+View::composer('device.create', 'ViewHelper@getCommunicationTypes');
