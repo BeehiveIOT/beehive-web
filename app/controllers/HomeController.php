@@ -16,9 +16,10 @@ class HomeController extends BaseController {
 	}
 
 	public function doLogin() {
-		if (Auth::attempt(['username'=>Input::get('username'),
-			'password' =>Input::get('password')])) {
-
+		if (Auth::attempt([
+			'username'=>Input::get('username'),
+			'password' =>Input::get('password')])
+			) {
 			return Redirect::intended('/');
 		}
 		return Redirect::to('login')
@@ -36,6 +37,7 @@ class HomeController extends BaseController {
 	}
 
 	public function doRegister() {
-		return "";
+		// TODO: Complete user registration
+		return "TODO";
 	}
 }

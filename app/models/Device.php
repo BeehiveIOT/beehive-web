@@ -3,26 +3,18 @@ class Device extends Eloquent {
     protected $table = 'devices';
 
     /**
-     * Returns the owner user
+     * Returns the template of this device
      * @return Eloquent belongs to relation
      */
-    public function user() {
-        return $this->belongsTo('User');
+    public function template() {
+        return $this->belongsTo('Template');
     }
 
     /**
-     * Returns the instances of a device
-     * @return Eloquent has many relation
+     * Returns the users that can use the device instance
+     * @return Eloquent many to many relation
      */
-    public function deviceInstances() {
-        return $this->hasMany('DeviceInstance');
-    }
-
-    /**
-     * Returns the commands of a device
-     * @return Eloquent has many relation
-     */
-    public function commands() {
-        return $this->hasMany('Command');
+    public function administrators() {
+        return $this->belongsToMany('User', 'device_admin', 'device_id');
     }
 }
