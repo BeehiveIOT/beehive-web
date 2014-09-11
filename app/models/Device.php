@@ -1,6 +1,7 @@
 <?php
 class Device extends Eloquent {
     protected $table = 'devices';
+    protected $hidden = ['pivot'];
 
     /**
      * Returns the template of this device
