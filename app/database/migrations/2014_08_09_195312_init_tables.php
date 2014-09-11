@@ -21,11 +21,11 @@ class InitTables extends Migration {
 			$t->string('username')->unique();
 			$t->string('email')->unique();
 			$t->string('password');
-			$t->string('country');
-			$t->string('organization')->nullable();
-			$t->string('website')->nullable();
 			$t->string('picture_url')->default('user.png');
 			$t->string('remember_token')->nullable();
+			$t->string('country');
+			$t->string('website')->nullable();
+			$t->string('organization')->nullable();
 			$t->timestamps();
 		});
 		Schema::create('templates', function($t) {
@@ -36,7 +36,7 @@ class InitTables extends Migration {
 			$t->timestamps();
 
 			$t->foreign('user_id')
-				->references('id')->on('users')->onDelete('set null');
+				->references('id')->on('users')->onDelete('cascade');
 		});
 		Schema::create('commands', function($t) {
 			$t->increments('id');
@@ -47,8 +47,8 @@ class InitTables extends Migration {
 			$t->string('argument_name');
 			$t->string('argument_type');
 			$t->string('argument_control');
-			$t->integer('argument_min');
-			$t->integer('argument_max');
+			$t->decimal('argument_min');
+			$t->decimal('argument_max');
 			$t->integer('template_id')->unsigned();
 			$t->timestamps();
 
@@ -60,12 +60,14 @@ class InitTables extends Migration {
 			$t->string('uuid');
 			$t->string('device_secret');
 			$t->string('name');
+			$t->string('picture_url')->default('device.png');
+			$t->string('description');
 			$t->boolean('public');
-			$t->integer('template_id')->nullable();
+			$t->integer('template_id')->unsigned()->nullable();
 			$t->timestamps();
 
 			$t->foreign('template_id')
-				->references('id')->on('template')->onDelete('set null');
+				->references('id')->on('templates')->onDelete('set null');
 		});
 		Schema::create('device_admin', function($t) {
 			$t->increments('id');
