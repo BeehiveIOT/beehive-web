@@ -10,6 +10,7 @@
 | your classes in the "global" namespace without Composer updating.
 |
 */
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 ClassLoader::addDirectories(array(
 
@@ -50,6 +51,15 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+});
+
+App::error(function(ModelNotFoundException $e)
+{
+    $acceptHeader = Request::header('Accept');
+    if ($acceptHeader === 'application/json') {
+        return Response::json(['message'=>'Item not found'], 404);
+    }
+    return Redirect::to('/');
 });
 
 /*
