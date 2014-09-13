@@ -26,6 +26,11 @@
 @stop
 
 @section('scripts')
+<script>
+  $(document).ready(function() {
+    $(document.getElementsByName('username')[0]).focus();
+  });
+</script>
 @stop
 
 @section('styles')
