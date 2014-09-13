@@ -26,6 +26,12 @@ Route::group(['before'=>'auth'], function() {
     Route::post('profile/changepassword', ['uses'=>'UserController@doChangePassword']);
     Route::get('user/{username}', ['uses'=>'UserController@get']);
     Route::post('profile/upload', ['uses' => 'UserController@uploadImage']);
+
+    Route::get('devices/json', ['uses'=>'DeviceController@items']);
+    Route::resource('devices', 'DeviceController');
+
+    Route::get('templates/json', ['uses'=>'TemplateController@items']);
+    Route::resource('templates', 'TemplateController');
 });
 
 

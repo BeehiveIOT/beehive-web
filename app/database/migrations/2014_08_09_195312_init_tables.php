@@ -62,7 +62,7 @@ class InitTables extends Migration {
 			$t->string('name');
 			$t->string('picture_url')->default('device.png');
 			$t->string('description');
-			$t->boolean('public');
+			$t->boolean('is_public');
 			$t->integer('template_id')->unsigned()->nullable();
 			$t->timestamps();
 

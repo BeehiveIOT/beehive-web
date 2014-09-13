@@ -22,9 +22,9 @@ module.exports = function(grunt) {
         ],
         dest: './public/assets/js/frontpage.js'
       },
-      deviceEdit: {
-        src: ['./frontend/js/device-edit/*.js'],
-        dest: './public/assets/js/device-edit.js'
+      devices: {
+        src: ['./frontend/js/devices/**/*.js'],
+        dest: './public/assets/js/devices.js'
       }
     },
     /**

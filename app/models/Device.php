@@ -18,4 +18,15 @@ class Device extends Eloquent {
     public function administrators() {
         return $this->belongsToMany('User', 'device_admin', 'device_id');
     }
+
+
+    /**
+     * Accessors
+     */
+    public function getIdAttribute($value) {
+        return (int)$value;
+    }
+    public function getIsPublicAttribute($value) {
+        return (bool)$value;
+    }
 }
