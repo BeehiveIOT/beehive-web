@@ -57,6 +57,8 @@ class DeviceController extends BaseController {
 
 		$device = new Device();
 		$device->name = Input::get('name');
+		$device->uuid = GUID::generate();
+		$device->device_secret = GUID::generate();
 		$device->description = Input::get('description');
 		$device->is_public = Input::get('isPublic')?true : false;
 		$device->template_id = Input::get('template_id');
@@ -81,7 +83,13 @@ class DeviceController extends BaseController {
 				'device_id as id', 'name', 'description', 'template_id as template',
 				'uuid as product_id', 'device_secret', 'is_public'
 			]);
-			// ->first();
+
+		$device->commands = [];
+		$template = $device->template()->get()->first();
+		if ($template != null) {
+			$commands = $template->commands()->get();
+			$device->commands = $commands;
+		}
 
 		if ($device) {
 			return Response::json($device, 200);

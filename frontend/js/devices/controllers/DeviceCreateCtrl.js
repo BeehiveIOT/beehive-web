@@ -19,7 +19,7 @@ angular.module('beehive')
         name: $scope.name,
         description: $scope.description,
         is_public: $scope.is_public || false,
-        template: $scope.template
+        template: $scope.template.id
       }).then(function(res) {
         $location.url('/');
         $scope.working = false;
