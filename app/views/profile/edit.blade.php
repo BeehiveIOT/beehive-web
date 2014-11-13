@@ -115,7 +115,7 @@
 @stop
 
 @section('scripts')
-<script src="{{asset('assets/js/upload.min.js')}}"></script>
+<script src="{{asset('assets/vendors/js/upload.min.js')}}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   $('#avatarUploader').fileupload({
