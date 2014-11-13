@@ -32,6 +32,10 @@ Route::group(['before'=>'auth'], function() {
 
     Route::get('templates/json', ['uses'=>'TemplateController@items']);
     Route::resource('templates', 'TemplateController');
+
+    Route::resource('templates.commands', 'CommandController');
+
+    Route::resource('commands.arguments', 'ArgumentController');
 });
 
 

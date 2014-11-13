@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-dark">
+      <div class="panel-heading"><b>Manage your templates</b></div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-10">
+            <label for="search">Search</label>
+            <input type="text" ng-model="search" class="form-control"
+              placeholder="Looking for a template?">
+          </div>
+          <div class="col-md-2">
+            <br>
+            <a href="#/create" class="btn btn-light">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <ul ng-repeat="template in templates | filter:search" class="template-list">
+          <li>
+            <div class="template-heading">
+              <img src="/uploads/avatars/device.png" alt="">
+              <span>{{template.name}}</span>
+              <div class="tools">
+                <a href="" ng-click="editing=true" ng-show="!editing"
+                  title="Edit"><i class="fa fa-pencil"></i></a>
+                &nbsp;
+                <a href="#/{{template.id}}/commands"
+                  title="Commands"><i class="fa fa-cogs"></i></a>
+                &nbsp;
+                <a href=""title="Remove"
+                  ng-click="delete($index)"><i class="fa fa-trash-o"></i></a>
+              </div>
+            </div>
+            <template-edit editing="editing" template="template"></template-edit>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

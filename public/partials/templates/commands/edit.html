@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-dark">
+      <div class="panel-heading"><b>Command Information</b></div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" ng-model="name" class="form-control"
+            placeholder="e.g. Turn light On" autocomplete="off">
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>Command</label>
+            <input type="{{typeSettings[cmd_type].control}}" ng-model="short_cmd"
+              class="form-control" autocomplete="off"
+              placeholder="{{typeSettings[cmd_type].placeholder}}"
+              />
+          </div>
+          <div class="col-md-6">
+            <label>Command Type</label>
+            <select class="form-control" ng-model="cmd_type">
+              <option value="int">Integer</option>
+              <option value="string">String</option>
+            </select>
+          </div>
+        </div>
+        <hr >
+        <div class="row argument">
+          <div class="col-md-3">
+            <label>Argument</label>
+            <input type="text" ng-model="arg_name" class="form-control"
+              placeholder="e.g. Intensity" autocomplete="off">
+          </div>
+          <div class="col-md-3">
+            <label>Type</label>
+            <select ng-model="arg_type" class="form-control">
+              <option value="number">Number</option>
+              <option value="string">String</option>
+            </select>
+          </div>
+          <div class="col-md-3" ng-show="arg_type=='string'">
+            <label>Default</label>
+            <input type="text" ng-model="arg_default" class="form-control"
+              placeholder="" autocomplete="off">
+          </div>
+          <div class="col-md-2" ng-show="arg_type=='number'">
+            <label>Minimum</label>
+            <input type="number" class="form-control" ng-model="arg_min">
+          </div>
+          <div class="col-md-2" ng-show="arg_type=='number'">
+            <label>Maximum</label>
+            <input type="number" class="form-control" ng-model="arg_max">
+          </div>
+          <div class="col-md-1">
+            <br>
+            <button title="Add Argument" class="btn btn-light" ng-click="addArgument()">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-light" ng-click="saveCommand()" ng-disabled="working">
+          <i class="fa fa-spinner fa-spin" ng-hide="!working"></i>
+          Save Changes
+        </button>
+        &nbsp;&nbsp;&nbsp;
+        <a href="#" title="Cancel">Cancel</a> <br><br>
+        <b>Argument List</b>
+        <table class="table table-condensed">
+          <thead>
+            <th class="col-md-1">#</th>
+            <th>Argument Name</th>
+            <th>Argument Type</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="argument in arguments">
+              <td>{{$index+1}}</td>
+              <td>{{argument.name}}</td>
+              <td>{{argument.type}}</td>
+              <td>
+                <a href="javascript:(0)" ng-click="removeArgument($index)">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

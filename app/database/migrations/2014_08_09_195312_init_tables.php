@@ -31,7 +31,7 @@ class InitTables extends Migration {
 		Schema::create('templates', function($t) {
 			$t->increments('id');
 			$t->string('name');
-			$t->string('description');
+			$t->string('description')->nullable()->default("");
 			$t->integer('user_id')->unsigned();
 			$t->timestamps();
 
@@ -41,19 +41,26 @@ class InitTables extends Migration {
 		Schema::create('commands', function($t) {
 			$t->increments('id');
 			$t->string('name');
-			$t->string('description')->default('');
 			$t->string('short_cmd');
 			$t->string('cmd_type');
-			$t->string('argument_name');
-			$t->string('argument_type');
-			$t->string('argument_control');
-			$t->decimal('argument_min');
-			$t->decimal('argument_max');
 			$t->integer('template_id')->unsigned();
 			$t->timestamps();
 
 			$t->foreign('template_id')
 				->references('id')->on('templates')->onDelete('cascade');
+		});
+		Schema::create('arguments', function($t) {
+			$t->increments('id');
+			$t->string('name');
+			$t->string('type');
+			$t->string('default')->nullable();
+			$t->decimal('minimum', 5, 2)->nullable();
+			$t->decimal('maximum', 5, 2)->nullable();
+			$t->integer('command_id')->unsigned();
+			$t->timestamps();
+
+			$t->foreign('command_id')
+				->references('id')->on('commands')->onDelete('cascade');
 		});
 		Schema::create('devices', function($t) {
 			$t->increments('id');
@@ -91,6 +98,7 @@ class InitTables extends Migration {
 		Schema::drop('countries');
 		Schema::drop('device_admin');
 		Schema::drop('devices');
+		Schema::drop('arguments');
 		Schema::drop('commands');
 		Schema::drop('templates');
 		Schema::drop('users');

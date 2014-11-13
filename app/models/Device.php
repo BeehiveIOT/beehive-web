@@ -12,6 +12,14 @@ class Device extends Eloquent {
     }
 
     /**
+     * Returns the commands of this device
+     * @return Eloquent has many through relation
+     */
+    public function commands() {
+        return $this->hasManyThrough('Command', 'Template');
+    }
+
+    /**
      * Returns the users that can use the device instance
      * @return Eloquent many to many relation
      */

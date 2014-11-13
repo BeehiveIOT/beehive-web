@@ -25,7 +25,19 @@ module.exports = function(grunt) {
       devices: {
         src: ['./frontend/js/devices/**/*.js'],
         dest: './public/assets/js/devices.js'
-      }
+      },
+      templates: {
+        src: ['./frontend/js/templates/**/*.js'],
+        dest: './public/assets/js/templates.js'
+      },
+      // upload: {
+      //   src: [
+      //     './frontend/js/upload/jquery.ui.widget.js',
+      //     './frontend/js/upload/jquery.iframe-transport.js',
+      //     './frontend/js/upload/jquery.fileupload.js',
+      //   ],
+      //   dest: './public/assets/js/upload  .js'
+      // }
     },
     /**
      * Compiles all stylesheets in different files in public/assets/css

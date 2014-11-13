@@ -25,4 +25,8 @@ class Template extends Eloquent {
     public function commands() {
         return $this->hasMany('Command');
     }
+
+    public function getIdAttribute($value) {
+        return (int)$value;
+    }
 }

@@ -9,11 +9,14 @@ class TemplateController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('template.index');
 	}
 
 	public function items() {
-		$templates = Auth::user()->templates()->get(['id', 'name']);
+		$templates = Auth::user()
+			->templates()->with('commands')
+			->get(['id', 'name', 'description']);
+		// print_r(DB::getQueryLog());
 
 		return Response::json($templates, 200);
 	}
@@ -26,7 +29,7 @@ class TemplateController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return Response::make('Ops', 404);
 	}
 
 
@@ -37,7 +40,23 @@ class TemplateController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$rules = ['name'=>'required|min:3'];
+		$validator = Validator::make(Input::all(), $rules);
+		if ($validator->fails()) {
+			return Response::json($validator->messages(), 400);
+		}
+
+		$template = new Template();
+		$template->name = Input::get('name');
+		$template->description = Input::get('description');
+		$template->user_id = Auth::user()->id;
+
+		$template->save();
+
+		return Response::json([
+			'message'=>'ok',
+			'id'=>$template->id
+		], 200);
 	}
 
 
@@ -49,7 +68,9 @@ class TemplateController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$template = Auth::user()->templates()
+			->where('id', '=', $id)->get(['id', 'name', 'description']);
+		return $template;
 	}
 
 
@@ -61,7 +82,7 @@ class TemplateController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		return Response::make('Ops', 404);
 	}
 
 
@@ -73,7 +94,24 @@ class TemplateController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$rules = ['name'=>'required|min:3'];
+		$validator = Validator::make(Input::all(), $rules);
+		if ($validator->fails()) {
+			return Response::json($validator->messages(), 400);
+		}
+
+		$template = Auth::user()->templates()
+			->where('templates.id','=',$id)->firstOrFail();
+
+		$template->name = Input::get('name');
+		$template->description = Input::get('description');
+		$template->save();
+
+		return Response::json([
+			'id'=>$template->id,
+			'name'=>$template->name,
+			'description'=>$template->description
+		], 200);
 	}
 
 
@@ -85,8 +123,13 @@ class TemplateController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$template = Auth::user()->templates()
+			->where('templates.id', '=', $id)->firstOrFail();
+
+		$template->delete();
+
+		return Response::json([
+			'message' => 'Template removed successfully.'
+		]);
 	}
-
-
 }

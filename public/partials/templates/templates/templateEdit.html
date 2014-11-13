@@ -1,0 +1,50 @@
+<div ng-show="editing" class="template-edit">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Name</label>
+        <input ng-model="clone.name" class="form-control" placeholder="Template Name"
+            autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea ng-model="clone.description" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-light" ng-click="save()" ng-disabled="working">
+          <i class="fa fa-spinner fa-spin" ng-hide="!working"></i>
+          Save Changes
+        </button>
+        &nbsp;&nbsp;&nbsp;
+        <a href="" ng-click="cancel()">Cancel</a>
+      </div>
+      <h4>Commands</h4>
+      <table class="table">
+        <thead>
+          <th class="col-md-2">#</th>
+          <th class="col-md-4">Name</th>
+          <th class="col-md-4">Short Command</th>
+          <th class="col-md-1"></th>
+          <th class="col-md-1"></th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="command in model.commands">
+            <td>{{$index+1}}</td>
+            <td>{{command.name}}</td>
+            <td>{{command.short_cmd}}</td>
+            <td>
+              <a href="#/{{command.template_id}}/commands/{{command.id}}">
+                <i class="fa fa-pencil"></i>
+              </a>
+            </td>
+            <td>
+              <a href="javascript:(0)" ng-click="removeCommand($index)">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

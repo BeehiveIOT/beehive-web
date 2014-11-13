@@ -38,4 +38,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function templates() {
 		return $this->hasMany('Template');
 	}
+
+	public function commands() {
+		return $this->hasManyThrough('Command', 'Template');
+	}
+
 }
