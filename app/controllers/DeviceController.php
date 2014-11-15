@@ -80,7 +80,7 @@ class DeviceController extends BaseController {
 		$device = Auth::user()->devices()
 			->where('device_id', '=', $id)
 			->firstOrFail([
-				'device_id as id', 'name', 'description', 'template_id as template',
+				'device_id as id', 'name', 'description', 'template_id',
 				'uuid as product_id', 'device_secret', 'is_public'
 			]);
 

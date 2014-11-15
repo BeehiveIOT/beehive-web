@@ -18,7 +18,12 @@
   <div class="col-md-2">
     <div class="panel panel-dark">
       <div class="panel-heading"><b>Device Commands</b></div>
-      <div class="panel-body"></div>
+      <div class="panel-body">
+        <!-- TODO: give funcitonality, something like, execute command -->
+        <ul>
+          <li ng-repeat="command in model.commands">{{command.name}}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

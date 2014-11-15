@@ -15,7 +15,8 @@ angular.module('beehive')
         $scope.model.is_public = res.data.is_public;
         $scope.model.product_id = res.data.product_id;
         $scope.model.device_secret = res.data.device_secret;
-        $scope.model.template = res.data.template;
+        $scope.model.template_id = res.data.template_id;
+        $scope.model.commands = res.data.commands;
       }, function(err) {});
     };
     load($routeParams.deviceId);
