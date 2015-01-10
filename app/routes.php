@@ -18,6 +18,21 @@ Route::post('logout', ['uses'=>'HomeController@doLogout']);
 Route::get('register', ['uses'=>'HomeController@register']);
 Route::post('register', ['uses'=>'HomeController@doRegister']);
 
+Route::post('auth/user', function() {
+    Log::info("Auth: ", Input::all());
+    return Response::make('', 200);
+});
+
+Route::post('auth/superuser', function() {
+    // TODO: superuser validation will be answer bad request
+    // as if there is a superuser it will not need ACL check
+    return Response::make('', 400);
+});
+
+Route::post('auth/acl', function() {
+    return Response::make('', 200);
+});
+
 Route::group(['before'=>'auth'], function() {
     Route::get('dashboard', ['uses'=>'DashboardController@index']);
     Route::get('profile', ['uses'=>'UserController@index']);
@@ -36,6 +51,10 @@ Route::group(['before'=>'auth'], function() {
     Route::resource('templates.commands', 'CommandController');
 
     Route::resource('commands.arguments', 'ArgumentController');
+
+    Route::get('real-time', function() {
+        return View::make('home.real');
+    });
 });
 
 
