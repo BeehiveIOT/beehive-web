@@ -15,7 +15,6 @@ abstract class GenericRepository implements Repository {
         return $result;
     }
 
-
     protected function totalItems() {
         return $this->model->count();
     }

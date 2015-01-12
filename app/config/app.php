@@ -121,7 +121,11 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-
+		// Third party
+		'Nathanmac\GUID\GUIDServiceProvider',
+		// Internal Beehive Service provider
+		'Beehive\Repo\RepoServiceProvider',
+		'Beehive\Service\Validation\ValidationServiceProvider',
 	),
 
 	/*
