@@ -1,76 +1,57 @@
 <?php
 
-class DeviceController extends BaseController {
+use Beehive\Repo\Device\DeviceRepo;
+use Beehive\Service\Validation\DeviceValidator;
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index(){
+class DeviceController extends BaseController {
+	protected $deviceRepo;
+	protected $validator;
+
+	public function __construct(DeviceRepo $deviceRepo, DeviceValidator $validator){
+		$this->deviceRepo = $deviceRepo;
+		$this->validator = $validator;
+	}
+
+	public function page() {
 		return View::make('device.index');
 	}
 
-	public function items() {
-		$devices = Auth::user()->devices()
-			->get(['devices.id', 'name', 'description', 'picture_url']);
+	/**
+	 * Get a list of devices
+	 *
+	 * @return Response
+	 */
+	public function index() {
+		$columns = ['devices.id', 'name', 'description', 'picture_url'];
+		$devices = $this->deviceRepo->getByUser(Auth::id(), $columns);
 
 		return Response::json($devices, 200);
 	}
 
-
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-
-	/**
-	 * Store a newly created resource in storage.
+	 * Store a device
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-		$rules = [
-			'name'=>'required|min:3'
-		];
-		$validator = Validator::make(Input::all(), $rules);
-		if ($validator->fails()) {
-			return Response::json($validator->messages(), 400);
-		}
+		if ($this->validator->with(Input::all())->passes()) {
+			try {
+				$device = $this->deviceRepo->createFor(Auth::id(), Input::all());
 
-		if (Input::get('template')) {
-			$template = Auth::user()->templates()
-				->where('id', '=', Input::get('template'))->get()->first();
-
-			if ($template == null) {
-				return Response::json(['template'=>'Invalid template'], 400);
+				return Response::json(['id'=>$device->id], 200);
 			}
+			catch(BeehiveException $e) {
+				return Response::json(['status'=>'There was a problemo jefe'], 500);
+			}
+		} else {
+			return Response::json($this->validator->errors(), 400);
 		}
-
-
-		$device = new Device();
-		$device->name = Input::get('name');
-		$device->uuid = GUID::generate();
-		$device->device_secret = GUID::generate();
-		$device->description = Input::get('description');
-		$device->is_public = Input::get('isPublic')?true : false;
-		$device->template_id = Input::get('template_id');
-		$device->save();
-		$device->administrators()->attach(Auth::user()->id);
-
-		return Response::json(['id'=>$device->id], 200);
 	}
 
 
 	/**
-	 * Display the specified resource.
+	 * Display device
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -98,19 +79,6 @@ class DeviceController extends BaseController {
 		}
 	}
 
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -137,17 +105,16 @@ class DeviceController extends BaseController {
 		], 200);
 	}
 
-
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove a device
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-		//
+		return Response::json([
+			'status' => 'Not implemented'
+		], 400);
 	}
-
-
 }

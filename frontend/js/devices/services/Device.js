@@ -4,7 +4,7 @@ angular.module('beehive')
   function ($http) {
     return {
       getAll: function() {
-        return $http.get('/devices/json');
+        return $http.get('/devices/');
       },
       get: function(deviceId) {
         return $http.get('/devices/'+deviceId);

@@ -42,8 +42,11 @@ Route::group(['before'=>'auth'], function() {
     Route::get('user/{username}', ['uses'=>'UserController@get']);
     Route::post('profile/upload', ['uses' => 'UserController@uploadImage']);
 
-    Route::get('devices/json', ['uses'=>'DeviceController@items']);
-    Route::resource('devices', 'DeviceController');
+    // Route::get('devices/json', ['uses'=>'DeviceController@items']);
+    Route::get('dashboard/devices', [
+        'uses' => 'DeviceController@page'
+    ]);
+    Route::resource('devices', 'DeviceController',['except'=>['create','edit']]);
 
     Route::get('templates/json', ['uses'=>'TemplateController@items']);
     Route::resource('templates', 'TemplateController');
