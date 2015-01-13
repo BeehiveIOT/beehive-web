@@ -37,7 +37,7 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
         $template_id = $data['template_id'];
         $user_id = $extra['user_id'];
         if (!isset($template_id) || !$this->templateRepo->isOwner($user_id, $template_id)) {
-            throw new \BeehiveException('Invalid template id');
+            throw new \BeehiveException('Invalid template id', 401);
         }
 
         $device = $this->newModelInstance();
@@ -59,7 +59,7 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
         $user_id = $extra['user_id'];
 
         if (!$device = $this->getByUser($id, $user_id)) {
-            throw new \BeehiveException('Device not available for this user.');
+            throw new \BeehiveException('Device not available for this user.', 401);
         }
 
         $device->name = $data['name'];

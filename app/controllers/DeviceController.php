@@ -46,7 +46,7 @@ class DeviceController extends BaseController {
 			return Response::json(['id'=>$device->id], 200);
 		}
 		catch(BeehiveException $e) {
-			return Response::json(['status'=>[$e->getMessage()]], 400);
+			return Response::json(['status'=>[$e->getMessage()]], $e->getCode());
 		}
 	}
 
@@ -77,7 +77,7 @@ class DeviceController extends BaseController {
 			return Response::json(['id'=>$device->id], 200);
 		}
 		catch(BeehiveException $e) {
-			return Response::json(['status'=>[$e->getMessage()]], 400);
+			return Response::json(['status'=>[$e->getMessage()]], $e->getCode());
 		}
 	}
 
