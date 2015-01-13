@@ -45,12 +45,12 @@ abstract class GenericRepository implements Repository {
         return $result;
     }
 
-    public function create(array $data) {
+    public function create(array $data, array $extra=[]) {
         $item = $this->model->create($data);
         return $item;
     }
 
-    public function update($id, array $data) {
+    public function update($id, array $data, array $extra=[]) {
         if (!$item = $this->get($id)) {
             return null;
         }

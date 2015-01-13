@@ -31,17 +31,19 @@ interface Repository {
     /**
      * Create a new model record in database
      * @param  array  $data
+     * @param  array  $extra
      * @return model instance
      */
-    public function create(array $data);
+    public function create(array $data, array $extra=[]);
 
     /**
      * Update a model record in database
      * @param  integer $id
      * @param  array  $data
+     * @param  array  $extra
      * @return null | model instance
      */
-    public function update($id, array $data);
+    public function update($id, array $data, array $extra=[]);
 
     /**
      * Detele a model record in database

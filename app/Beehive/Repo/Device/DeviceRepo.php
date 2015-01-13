@@ -5,6 +5,6 @@ use Beehive\Repo\Repository;
 
 interface DeviceRepo extends Repository {
 
-    public function getByUser($id, array $columns=['devices.*']);
-    public function createFor($user_id, array $data);
+    public function getAllByUser($id, array $columns=['devices.*']);
+    public function getByUser($device_id, $user_id, array $columns=['devices.*']);
 }

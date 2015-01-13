@@ -16,7 +16,7 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
         $this->templateRepo = $templateRepo;
     }
 
-    public function getByUser($id, array $columns=['devices.*']) {
+    public function getAllByUser($id, array $columns=['devices.*']) {
         return $this->model
             ->join('device_admin as da', 'devices.id', '=', 'da.device_id')
             ->where('da.user_id', '=', $id)
@@ -24,29 +24,49 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
             ->all();
     }
 
-    public function createFor($user_id, array $data) {
-        if ($template_id = $data['template_id']) {
-            if (!$this->templateRepo->isOwner($user_id, $template_id)) {
-                throw new \BeehiveException('Invalid template id');
-            }
+    public function getByUser($device_id, $user_id, array $columns=['devices.*']) {
+        return $this->model
+            ->join('device_admin as da', 'devices.id', '=', 'da.device_id')
+            ->where('da.user_id', '=', $user_id)
+            ->where('devices.id', '=', $device_id)
+            ->first($columns);
+    }
+
+
+    public function create(array $data, array $extra=[]) {
+        $template_id = $data['template_id'];
+        $user_id = $extra['user_id'];
+        if (!isset($template_id) || !$this->templateRepo->isOwner($user_id, $template_id)) {
+            throw new \BeehiveException('Invalid template id');
         }
 
-        try {
-            $device = $this->newModelInstance();
-            $device->name = $data['name'];
-            $device->uuid = GUID::generate();
-            $device->device_secret = GUID::generate();
-            $device->description = $data['description'];
-            $device->is_public = $data['is_public'] ? true : false;
-            $device->template_id = $template_id ?: null;
-            $device->save();
+        $device = $this->newModelInstance();
+        $device->name = $data['name'];
+        $device->uuid = GUID::generate();
+        $device->device_secret = GUID::generate();
+        $device->description = $data['description'];
+        $device->is_public = $data['is_public'] ? true : false;
+        $device->template_id = $template_id ?: null;
+        $device->save();
 
-            // $user_id as default administrator
-            $device->administrators()->attach($user_id);
+        // $user_id as default administrator
+        $device->administrators()->attach($user_id);
 
-            return $device;
-        } catch(Exception $e) {
-            throw new \BeehiveException($e->getMessage());
+        return $device;
+    }
+
+    public function update($id, array $data, array $extra=[]) {
+        $user_id = $extra['user_id'];
+
+        if (!$device = $this->getByUser($id, $user_id)) {
+            throw new \BeehiveException('Device not available for this user.');
         }
+
+        $device->name = $data['name'];
+        $device->description = $data['description'];
+        $device->is_public = $data['is_public'];
+        $device->save();
+
+        return $device;
     }
 }
