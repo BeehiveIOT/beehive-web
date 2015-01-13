@@ -18,7 +18,7 @@ angular.module('beehive')
       Device.create({
         name: $scope.name,
         description: $scope.description,
-        is_public: $scope.is_public || false,
+        is_public: $scope.is_public,
         template_id: $scope.template? $scope.template.id : null
       }).then(function(res) {
         $location.url('/');
