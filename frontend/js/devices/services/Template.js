@@ -4,7 +4,7 @@ angular.module('beehive')
   function($http) {
     return {
       getAll: function() {
-        return $http.get('/templates/json');
+        return $http.get('/templates');
       }
     };
   }

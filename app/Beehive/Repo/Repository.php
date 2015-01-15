@@ -48,9 +48,10 @@ interface Repository {
     /**
      * Detele a model record in database
      * @param  integer $id
+     * @param  array $extra
      * @return boolean
      */
-    public function delete($id);
+    public function delete($id, array $extra=[]);
 
     /**
      * Create a new model instance

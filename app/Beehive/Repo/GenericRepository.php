@@ -61,7 +61,7 @@ abstract class GenericRepository implements Repository {
         return $item;
     }
 
-    public function delete($id) {
+    public function delete($id, array $extra=[]) {
         if ($item = $this->get($id)) {
             $item->delete($id);
 

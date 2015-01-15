@@ -1,135 +1,85 @@
 <?php
 
-class TemplateController extends \BaseController {
+use Beehive\Repo\Template\TemplateRepo;
+use Beehive\Repo\Command\CommandRepo;
+use Beehive\Service\Validation\TemplateValidator;
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
+class TemplateController extends \BaseController {
+	protected $templateRepo;
+	protected $validator;
+	protected $commandrepo;
+
+	public function __construct(
+		TemplateRepo $templateRepo,
+		TemplateValidator $validator,
+		CommandRepo $commandRepo)
+	{
+		$this->templateRepo = $templateRepo;
+		$this->validator = $validator;
+		$this->commandRepo = $commandRepo;
+	}
+
+	public function page()
 	{
 		return View::make('template.index');
 	}
 
-	public function items() {
-		$templates = Auth::user()
-			->templates()->with('commands')
-			->get(['id', 'name', 'description']);
-		// print_r(DB::getQueryLog());
+	public function index() {
+		$columns = ['id', 'name', 'description'];
+		$templates = $this->templateRepo->getAllByUser(Auth::id(), $columns, 'commands');
 
 		return Response::json($templates, 200);
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return Response::make('Ops', 404);
-	}
-
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
-		$rules = ['name'=>'required|min:3'];
-		$validator = Validator::make(Input::all(), $rules);
-		if ($validator->fails()) {
-			return Response::json($validator->messages(), 400);
+		$data = Input::all();
+		if (!$this->validator->with($data)->passes()) {
+			return Response::json($this->validator->errors(), 400);
 		}
 
-		$template = new Template();
-		$template->name = Input::get('name');
-		$template->description = Input::get('description');
-		$template->user_id = Auth::user()->id;
+		$extra = ['user_id'=>Auth::id()];
+		$template = $this->templateRepo->create($data, $extra);
 
-		$template->save();
-
-		return Response::json([
-			'message'=>'ok',
-			'id'=>$template->id
-		], 200);
+		return Response::json(['id'=>$template->id], 200);
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($id)
 	{
-		$template = Auth::user()->templates()
-			->where('id', '=', $id)->get(['id', 'name', 'description']);
+		$columns = ['id', 'name', 'description'];
+		if (!$template = $this->templateRepo->getByUser($id, Auth::id(), $columns)) {
+			return Response::json(['status'=>['Template not found']], 404);
+		}
+
 		return $template;
 	}
 
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		return Response::make('Ops', 404);
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
-		$rules = ['name'=>'required|min:3'];
-		$validator = Validator::make(Input::all(), $rules);
-		if ($validator->fails()) {
-			return Response::json($validator->messages(), 400);
+		$data = Input::all();
+		if (!$this->validator->with($data)->passes()) {
+			return Response::json($this->validator->errors(), 400);
 		}
 
-		$template = Auth::user()->templates()
-			->where('templates.id','=',$id)->firstOrFail();
+		try {
+			$extra = ['user_id'=>Auth::id()];
+			$template = $this->templateRepo->update($id, $data, $extra);
+			$result = ['id' => $template->id,'name' => $template->name,
+				'description'=>$template->description];
 
-		$template->name = Input::get('name');
-		$template->description = Input::get('description');
-		$template->save();
-
-		return Response::json([
-			'id'=>$template->id,
-			'name'=>$template->name,
-			'description'=>$template->description
-		], 200);
+			return Response::json($result, 200);
+		}
+		catch(BeehiveException $e) {
+			return Response::json(['status'=>[$e->getMessage()]], $e->getCode());
+		}
 	}
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
-		$template = Auth::user()->templates()
-			->where('templates.id', '=', $id)->firstOrFail();
-
-		$template->delete();
-
-		return Response::json([
-			'message' => 'Template removed successfully.'
-		]);
+		$extra = ['user_id'=>Auth::id()];
+		if ($this->templateRepo->delete($id, $extra)) {
+			return Response::json(['message' => 'Template removed successfully.', 200]);
+		}
+		return Response::json(['message' => 'Template was not removed.', 400]);
 	}
 }

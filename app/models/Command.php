@@ -1,7 +1,7 @@
 <?php
 class Command extends Eloquent {
     protected $table = 'commands';
-    protected $hidden = ['user_id'];
+    protected $hidden = ['user_id', 'created_at', 'updated_at'];
 
     /**
      * Returns the template that can execute this command
