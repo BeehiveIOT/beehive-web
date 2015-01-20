@@ -1,22 +1,18 @@
 <?php
 
 use Beehive\Repo\Template\TemplateRepo;
-use Beehive\Repo\Command\CommandRepo;
 use Beehive\Service\Validation\TemplateValidator;
 
 class TemplateController extends \BaseController {
 	protected $templateRepo;
 	protected $validator;
-	protected $commandrepo;
 
 	public function __construct(
 		TemplateRepo $templateRepo,
-		TemplateValidator $validator,
-		CommandRepo $commandRepo)
+		TemplateValidator $validator)
 	{
 		$this->templateRepo = $templateRepo;
 		$this->validator = $validator;
-		$this->commandRepo = $commandRepo;
 	}
 
 	public function page()

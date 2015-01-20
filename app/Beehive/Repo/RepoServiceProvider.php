@@ -24,7 +24,10 @@ class RepoServiceProvider extends ServiceProvider {
         });
 
         $app->bind('Beehive\Repo\Command\CommandRepo', function($app) {
-            return new CommandRepoImpl(new Command());
+            return new CommandRepoImpl(
+                new Command(),
+                $app->make('Beehive\Repo\Template\TemplateRepo')
+            );
         });
     }
 

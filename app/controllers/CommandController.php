@@ -1,37 +1,24 @@
 <?php
+use Beehive\Repo\Command\CommandRepo;
 
-class CommandController extends \BaseController {
+class CommandController extends \BaseController
+{
+	protected $commandRepo;
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+	public function __construct(CommandRepo $commandRepo)
+	{
+		$this->commandRepo = $commandRepo;
+	}
+
+
 	public function index($templateId)
 	{
-		$commands = Auth::user()->commands()
-			->where('template_id', '=', $templateId)->get();
+		$extra = ['user_id'=>Auth::id()];
+		$commands = $this->commandRepo->getAllByTemplate($templateId, $extra);
 
-		return $commands;
+		return Response::json($commands, 200);
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store($templateId)
 	{
 		$data = Input::all();
@@ -77,55 +64,19 @@ class CommandController extends \BaseController {
 		], 200);
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $templateId
-	 * @param  int  $commandId
-	 * @return Response
-	 */
 	public function show($templateId, $commandId)
 	{
-		$command = Auth::user()->commands()
-			->where('commands.template_id', '=', $templateId)
-			->where('commands.id', '=', $commandId)
-			->with('arguments')
-			->get()->first();
+		$extra = ['user_id'=>Auth::id(), 'relation'=>'arguments'];
+		$command = $this->commandRepo->getByTemplate($commandId, $templateId, $extra);
 
 		return Response::json($command, 200);
 	}
 
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		return Response::make('Ops', 404);
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
 		//
 	}
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($templateId, $commandId)
 	{
 		$command = Auth::user()->commands()

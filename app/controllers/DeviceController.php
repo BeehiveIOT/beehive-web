@@ -57,10 +57,10 @@ class DeviceController extends BaseController {
 			return Response::json(['status'=>['Device not found']], 404);
 		}
 
-		$commands = $this->commandRepo->getByTemplate($device->template_id);
+		$commands = $this->commandRepo->getAllByTemplate($device->template_id);
 		$device->commands = $commands;
 
-		return $device;
+		return Response::json($device, 200);
 	}
 
 	public function update($id)

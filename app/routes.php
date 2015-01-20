@@ -34,6 +34,8 @@ Route::post('auth/acl', function() {
 });
 
 Route::group(['before'=>'auth'], function() {
+    $except = ['except'=>['create','edit']];
+
     Route::get('dashboard', ['uses'=>'DashboardController@index']);
     Route::get('profile', ['uses'=>'UserController@index']);
     Route::get('profile/edit', ['uses'=>'UserController@edit']);
@@ -43,14 +45,14 @@ Route::group(['before'=>'auth'], function() {
     Route::post('profile/upload', ['uses' => 'UserController@uploadImage']);
 
     Route::get('dashboard/devices', ['uses' => 'DeviceController@page']);
-    Route::resource('devices', 'DeviceController',['except'=>['create','edit']]);
+    Route::resource('devices', 'DeviceController', $except);
 
     Route::get('dashboard/templates', ['uses'=>'TemplateController@page']);
-    Route::resource('templates', 'TemplateController',['except'=>['create','edit']]);
+    Route::resource('templates', 'TemplateController', $except);
 
-    Route::resource('templates.commands', 'CommandController');
+    Route::resource('templates.commands', 'CommandController', $except);
 
-    Route::resource('commands.arguments', 'ArgumentController');
+    Route::resource('commands.arguments', 'ArgumentController', $except);
 
     /**
      * All this is PoC stuff gonna be removed :3
