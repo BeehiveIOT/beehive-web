@@ -5,9 +5,11 @@ use Illuminate\Support\ServiceProvider;
 use Beehive\Repo\Device\DeviceRepoImpl;
 use Beehive\Repo\Template\TemplateRepoImpl;
 use Beehive\Repo\Command\CommandRepoImpl;
+use Beehive\Repo\Argument\ArgumentRepoImpl;
 use Device;
 use Template;
 use Command;
+use Argument;
 
 class RepoServiceProvider extends ServiceProvider {
     public function register(){
@@ -26,8 +28,13 @@ class RepoServiceProvider extends ServiceProvider {
         $app->bind('Beehive\Repo\Command\CommandRepo', function($app) {
             return new CommandRepoImpl(
                 new Command(),
-                $app->make('Beehive\Repo\Template\TemplateRepo')
+                $app->make('Beehive\Repo\Template\TemplateRepo'),
+                $app->make('Beehive\Repo\Argument\ArgumentRepo')
             );
+        });
+
+        $app->bind('Beehive\Repo\Argument\ArgumentRepo', function($app) {
+            return new ArgumentRepoImpl(new Argument());
         });
     }
 

@@ -54,8 +54,8 @@ angular.module('beehive')
         name: $scope.arg_name,
         type: $scope.arg_type,
         default: $scope.arg_default || "",
-        max: $scope.arg_max || null,
-        min: $scope.arg_min || null
+        maximum: $scope.arg_max || null,
+        minimum: $scope.arg_min || null
       };
 
       // Update rest resource if it exists, in other case,

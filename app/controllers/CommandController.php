@@ -1,15 +1,23 @@
 <?php
 use Beehive\Repo\Command\CommandRepo;
+use Beehive\Service\Validation\CommandValidator;
+use Beehive\Service\Validation\ArgumentValidator;
 
 class CommandController extends \BaseController
 {
 	protected $commandRepo;
+	protected $cmdValidator;
+	protected $argValidator;
 
-	public function __construct(CommandRepo $commandRepo)
+	public function __construct(
+		CommandRepo $commandRepo,
+		CommandValidator $cmdValidator,
+		ArgumentValidator $argValidator)
 	{
 		$this->commandRepo = $commandRepo;
+		$this->cmdValidator = $cmdValidator;
+		$this->argValidator = $argValidator;
 	}
-
 
 	public function index($templateId)
 	{
@@ -22,46 +30,14 @@ class CommandController extends \BaseController
 	public function store($templateId)
 	{
 		$data = Input::all();
-		$data['template_id'] = $templateId;
-		$commandRules = [
-			'name' => 'required|min:3',
-			'short_cmd' => 'required',
-			'cmd_type' => 'required|in:int,string',
-			'template_id' => 'exists:templates,id'
-		];
+		if (!$this->cmdValidator->with($data)->passes()) {
+			return Response::json($this->cmdValidator->errors(), 400);
+		}
 
-		// Init transaction
-		$command = new Command();
-		DB::transaction(function() use($command, $templateId) {
-			$command->name = Input::get('name');
-			$command->short_cmd = Input::get('short_cmd');
-			$command->cmd_type = Input::get('type');
-			$command->template_id = $templateId;
-			$command->save();
+		$extra = ['template_id' => $templateId];
+		$command = $this->commandRepo->create($data, $extra);
 
-			$arguments = Input::get('arguments');
-			for($i = 0; $i < count($arguments); ++$i) {
-				$argument = new Argument();
-				$argument->name = $arguments[$i]['name'];
-				$argument->type = $arguments[$i]['type'];
-				$argument->default = $arguments[$i]['default'];
-				$argument->minimum = $arguments[$i]['min'];
-				$argument->maximum = $arguments[$i]['max'];
-				$argument->command_id = $command->id;
-
-				$argument->save();
-			}
-		});
-		DB::commit();
-
-		return Response::json([
-			'id' => $command->id,
-			'name' => $command->name,
-			'short_cmd' => $command->short_cmd,
-			'cmd_type' => $command->cmd_type,
-			'template_id' => $command->template_id,
-			'created_at' => $command->created_at->format('c')
-		], 200);
+		return Response::json($command, 200);
 	}
 
 	public function show($templateId, $commandId)
@@ -79,13 +55,20 @@ class CommandController extends \BaseController
 
 	public function destroy($templateId, $commandId)
 	{
-		$command = Auth::user()->commands()
-			->where('template_id', '=', $templateId)
-			->where('commands.id', '=', $commandId)
-			->get()->first();
+		$extra = ['user_id' => Auth::id(), 'template_id'=>$templateId];
+		if ($this->commandRepo->delete($commandId, $extra)) {
+			return Response::make(['status'=>'ok'], 200);
+		}
+		return Response::make(['status'=>'error'], 400);
+	}
 
-		$command->delete();
+	private function validateArguments($arguments) {
+		for($i = 0; $i < count($arguments); $i++) {
+			if (!$this->argValidator->with($arguments[$i])->passes()) {
+				return false;
+			}
+		}
 
-		return Response::make('OK', 200);
+		return true;
 	}
 }

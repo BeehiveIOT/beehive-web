@@ -4,22 +4,30 @@ namespace Beehive\Repo\Command;
 use Illuminate\Database\Eloquent\Model;
 use Beehive\Repo\GenericRepository;
 use Beehive\Repo\Template\TemplateRepo;
+use Beehive\Repo\Argument\ArgumentRepo;
+use \DB;
 
 class CommandRepoImpl extends GenericRepository implements CommandRepo
 {
     protected $templateRepo;
+    protected $argumentRepo;
 
-    public function __construct(Model $model, TemplateRepo $templateRepo)
+    public function __construct(
+        Model $model, TemplateRepo $templateRepo, ArgumentRepo $argRepo)
     {
         $this->model = $model;
         $this->templateRepo = $templateRepo;
+        $this->argumentRepo = $argRepo;
     }
 
-    public function getAllByTemplate($template_id, array $extra=[], array $columns=['commands.*'])
+    public function getAllByTemplate(
+        $template_id, array $extra=[], array $columns=['commands.*'])
     {
-        $user_id = isset($extra['user_id']) ? $extra['user_id'] : null;
-        if($user_id && !$this->templateRepo->isOwner($template_id, $user_id)) {
-            return [];
+        if (isset($user_id)) {
+            $user_id = $extra['user_id'];
+            if(!$this->templateRepo->isOwner($template_id, $user_id)) {
+                return [];
+            }
         }
 
         return $this->model
@@ -31,12 +39,14 @@ class CommandRepoImpl extends GenericRepository implements CommandRepo
     public function getByTemplate(
         $id, $template_id, array $extra=[], array $columns=['commands.*'])
     {
-        $user_id = isset($extra['user_id']) ? $extra['user_id'] : null;
-        $relation = isset($extra['relation']) ? $extra['relation'] : '';
-        if($user_id && !$this->templateRepo->isOwner($template_id, $user_id)) {
-            return null;
+        if (isset($user_id)) {
+            $user_id = $extra['user_id'];
+            if(!$this->templateRepo->isOwner($template_id, $user_id)) {
+                return null;
+            }
         }
 
+        $relation = isset($extra['relation']) ? $extra['relation'] : '';
         $query = $this->model
             ->where('commands.template_id','=',$template_id)
             ->where('commands.id','=',$id);
@@ -46,5 +56,44 @@ class CommandRepoImpl extends GenericRepository implements CommandRepo
         }
 
         return $query->first($columns);
+    }
+
+    public function create(array $data, array $extra=[])
+    {
+        $argRepo = $this->argumentRepo;
+        $command = $this->newModelInstance();
+        if (!isset($extra['template_id'])) {
+            return null;
+        }
+        $template_id = $extra['template_id'];
+        $arguments = isset($data['arguments']) ? $data['arguments'] : [];
+
+        DB::transaction(function()use($command, $argRepo, $template_id, $data, $arguments) {
+            $command->name = $data['name'];
+            $command->short_cmd = $data['short_cmd'];
+            $command->cmd_type = $data['type'];
+            $command->template_id = $template_id;
+            $command->save();
+
+            for($i = 0; $i < count($arguments); $i++) {
+                $arguments[$i]['command_id'] = $command->id;
+                $argRepo->create($arguments[$i]);
+            }
+        });
+        DB::commit();
+
+        return $command;
+    }
+
+    public function delete($id, array $extra=[])
+    {
+        if (isset($data['user_id']) && isset($data['template_id'])) {
+            if (!$command = $this->getByTemplate($id, $extra)) {
+                return false;
+            }
+            return $command->delete();
+        }
+
+        return parent::delete($id);
     }
 }
