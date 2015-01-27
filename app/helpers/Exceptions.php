@@ -2,6 +2,11 @@
 
 class BeehiveNotFoundException extends Exception {}
 class BeehiveException extends Exception {}
+class BeehiveRestException extends Exception {
+    const INVALID_TOKEN = 1;
+    const EXPIRED_TOKEN = 2;
+    const UNAUTHORIZED_TOKEN = 4;
+}
 // class FileNotFoundException extends Exception {}
 // class ProjectNotFoundException extends Exception {}
 // class EventNotFoundException extends Exception {}

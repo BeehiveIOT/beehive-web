@@ -33,6 +33,9 @@ class CommandController extends \BaseController
 		if (!$this->cmdValidator->with($data)->passes()) {
 			return Response::json($this->cmdValidator->errors(), 400);
 		}
+		if (!$this->validateArguments($data['arguments'])) {
+			return Response::json($this->argValidator->errors(), 400);
+		}
 
 		$extra = ['template_id' => $templateId];
 		$command = $this->commandRepo->create($data, $extra);

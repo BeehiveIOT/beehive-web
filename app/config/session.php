@@ -31,6 +31,8 @@ return array(
 
 	'lifetime' => 120,
 
+	'rest_token_expiration' => 60,
+
 	'expire_on_close' => false,
 
 	/*

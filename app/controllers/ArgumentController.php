@@ -1,56 +1,45 @@
 <?php
+use Beehive\Repo\Argument\ArgumentRepo;
+use Beehive\Service\Validation\ArgumentValidator;
 
-class ArgumentController extends \BaseController {
+
+class ArgumentController extends \BaseController
+{
+	protected $argumentRepo;
+	protected $validator;
+
+	public function __construct(ArgumentRepo $argumentRepo, ArgumentValidator $validator)
+	{
+		$this->argumentRepo = $argumentRepo;
+		$this->validator = $validator;
+	}
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($templateId, $commandId)
 	{
-		return Response::make('Ops', 404);
+		$arguments = $this->argumentRepo->getByCommand($commandId);
+
+		return Response::json($arguments, 200);
 	}
-
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return Response::make('Ops', 404);
-	}
-
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store($commandId)
+	public function store($templateId, $commandId)
 	{
-		$command = Auth::user()->commands()
-			->where('commands.id', '=', $commandId)->firstOrFail();
-
-		$validator = Validator::make(Input::all(), [
-			'name' => 'required|min:3',
-			'type' => 'required|in:number,string',
-		]);
-
-		if ($validator->fails()) {
-			return Response::json(['message'=>'Invalid data'], 400);
+		$data = Input::all();
+		$data['command_id'] = $commandId;
+		if (!$this->validator->with($data)->passes()) {
+			return Response::json($this->validator->errors(), 400);
 		}
 
-		$argument = new Argument();
-		$argument->name = Input::get('name');
-		$argument->type = Input::get('type');
-		$argument->default = Input::get('default');
-		$argument->maximum = Input::get('max');
-		$argument->minimum = Input::get('min');
-		$argument->command_id = $commandId;
-		$argument->save();
+		$argument = $this->argumentRepo->create($data);
 
 		return Response::json($argument, 200);
 	}
@@ -62,37 +51,11 @@ class ArgumentController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($commandId, $argumentId)
+	public function show($templateId, $commandId, $argumentId)
 	{
-		$command = Auth::user()->commands()
-			->where('commands.id','=',$commandId)->get()->first();
-
-		if (!$command) {
-			return Response::json(['message'=>'Not found'], 404);
-		}
-
-		$argument = $command->arguments()
-			->where('id','=',$argumentId)->get()->first();
-
-		if (!$argument) {
-			return Response::json(['message'=>'Not found'], 404);
-		}
-
+		$argument = $this->argumentRepo->get($argumentId);
 		return Response::json($argument, 200);
 	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		return Response::make('Ops', 404);
-	}
-
 
 	/**
 	 * Update the specified resource in storage.
@@ -100,9 +63,9 @@ class ArgumentController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($templateId, $commandId, $argumentId)
 	{
-		return Response::make('Ops', 404);
+		return Response::json(['status'=>'Not implemented'], 501);
 	}
 
 
@@ -113,25 +76,12 @@ class ArgumentController extends \BaseController {
 	 * @param  int  $argumentId
 	 * @return Response
 	 */
-	public function destroy($commandId, $argumentId)
+	public function destroy($templateId, $commandId, $argumentId)
 	{
-		$command = Auth::user()->commands()
-			->where('commands.id','=',$commandId)->get()->first();
-
-		if (!$command) {
-			return Response::json(['message'=>'Not found'], 404);
+		if ($this->argumentRepo->delete($argumentId)) {
+			return Response::make(['status'=>'ok'], 200);
 		}
-
-		$argument = $command->arguments()
-			->where('id','=',$argumentId)->get()->first();
-
-		if (!$argument) {
-			return Response::json(['message'=>'Not found'], 404);
-		}
-
-		$argument->delete();
-
-		return Response::make("OK", 200);
+		return Response::make(['status'=>'error'], 400);
 	}
 
 }

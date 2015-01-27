@@ -10,7 +10,18 @@ class ArgumentRepoImpl extends GenericRepository implements ArgumentRepo {
         $this->model = $model;
     }
 
-    public function create(array $data, array $extra=[]) {
+    public function getByCommand($command_id, array $columns=['arguments.*'])
+    {
+        $arguments = $this->model
+            ->where('command_id', '=', $command_id)
+            ->get($columns)
+            ->all();
+
+        return $arguments;
+    }
+
+    public function create(array $data, array $extra=[])
+    {
         $argument = $this->newModelInstance();
         $argument->name = $data['name'];
         $argument->type = $data['type'];

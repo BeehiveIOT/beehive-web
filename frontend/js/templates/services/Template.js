@@ -30,11 +30,11 @@ angular.module('beehive')
       deleteCommand: function(commandId, templateId) {
         return $http.delete('/templates/'+templateId+'/commands/'+command.id);
       },
-      createArgument: function(commandId, data) {
-        return $http.post('/commands/'+commandId+'/arguments', data);
+      createArgument: function(templateId, commandId, data) {
+        return $http.post('/templates/'+templateId+'/commands/'+commandId+'/arguments', data);
       },
-      deleteArgument: function(commandId, argumentId) {
-        return $http.delete('/commands/'+commandId+'/arguments/'+argumentId);
+      deleteArgument: function(templateId, commandId, argumentId) {
+        return $http.delete('/templates/'+templateId+'/commands/'+commandId+'/arguments/'+argumentId);
       }
     };
   }

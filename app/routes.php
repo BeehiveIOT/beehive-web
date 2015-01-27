@@ -52,7 +52,7 @@ Route::group(['before'=>'auth'], function() {
 
     Route::resource('templates.commands', 'CommandController', $except);
 
-    Route::resource('commands.arguments', 'ArgumentController', $except);
+    Route::resource('templates.commands.arguments', 'ArgumentController', $except);
 
     /**
      * All this is PoC stuff gonna be removed :3
@@ -66,5 +66,11 @@ Route::get('design', function() {
     return View::make('home.design');
 });
 
+Route::group(['prefix' => 'api/v1'], function() {
+    Route::group(['before' => 'rest_auth'], function() {
+        Route::post('auth', ['uses'=>'Controllers\Rest\AuthController@auth']);
+
+    });
+});
 
 View::composer('profile.edit', 'ViewHelper@getCountries');

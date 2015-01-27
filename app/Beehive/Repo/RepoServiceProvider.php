@@ -6,10 +6,14 @@ use Beehive\Repo\Device\DeviceRepoImpl;
 use Beehive\Repo\Template\TemplateRepoImpl;
 use Beehive\Repo\Command\CommandRepoImpl;
 use Beehive\Repo\Argument\ArgumentRepoImpl;
+use Beehive\Repo\User\UserRepoImpl;
+use Beehive\Repo\Auth\AuthRepoImpl;
 use Device;
 use Template;
 use Command;
 use Argument;
+use User;
+use RestToken;
 
 class RepoServiceProvider extends ServiceProvider {
     public function register(){
@@ -36,6 +40,18 @@ class RepoServiceProvider extends ServiceProvider {
         $app->bind('Beehive\Repo\Argument\ArgumentRepo', function($app) {
             return new ArgumentRepoImpl(new Argument());
         });
+
+        $app->bind('Beehive\Repo\User\UserRepo', function($app) {
+            return new UserRepoImpl(new User());
+        });
+
+        $app->bind('Beehive\Repo\Auth\AuthRepo', function($app) {
+            $expiration_time = \Config::get('session.rest_token_expiration');
+            $userRepo = $app->make('Beehive\Repo\User\UserRepo');
+
+            return new AuthRepoImpl(new RestToken(), $userRepo, $expiration_time);
+        });
+
     }
 
     public function boot() {

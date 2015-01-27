@@ -20,8 +20,8 @@
       <li class="dropdown">
         <a href="" class="dropdown-toggle" data-toggle="dropdown">Actions <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="{{url('devices')}}">Manage Devices</a></li>
-          <li><a href="{{url('templates')}}">Manage Templates</a></li>
+          <li><a href="{{url('dashboard/devices')}}">Manage Devices</a></li>
+          <li><a href="{{url('dashboard/templates')}}">Manage Templates</a></li>
           <!-- <li class="divider"></li> -->
         </ul>
       </li>

@@ -61,7 +61,7 @@ angular.module('beehive')
       // Update rest resource if it exists, in other case,
       // just add to local array and wait for saveCommand
       if (commandId) {
-        Template.createArgument(commandId, argument)
+        Template.createArgument(templateId, commandId, argument)
         .then(function(res){
           argument.id = res.data.id;
           argument.name = res.data.name;
@@ -111,7 +111,7 @@ angular.module('beehive')
       var argument = $scope.arguments[index];
 
       if (argument.id) {
-        Template.deleteArgument(commandId, argument.id).then(function(res) {
+        Template.deleteArgument(templateId, commandId, argument.id).then(function(res) {
           $scope.arguments.splice(index, 1);
         }, function(err){});
       } else {
