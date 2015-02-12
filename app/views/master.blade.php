@@ -53,10 +53,10 @@
 
 @if (App::environment('local'))
 <script src="{{asset('assets/vendors/js/jquery.min.js')}}"></script>
-<script src="{{asset('assets/vendors/js/bootstrap.min.js')}}"></script>
 @else
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 @endif
+<script src="{{asset('assets/vendors/js/bootstrap.min.js')}}"></script>
 {{-- Scripts --}}
 @yield('scripts')
 {{-- Templates --}}
