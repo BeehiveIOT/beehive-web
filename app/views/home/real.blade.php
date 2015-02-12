@@ -46,7 +46,7 @@
   $(document).ready(function() {
     var messages = $('#messages');
     var x = new BeehiveBridge({
-      wsUrl: 'http://localhost:9999/echo',
+      wsUrl: 'http://' + document.domain +':9999/echo',
       deviceKey: 'sergio'
     });
 
