@@ -25,9 +25,16 @@ $app = new Illuminate\Foundation\Application;
 */
 
 $env = $app->detectEnvironment(function() {
-    return getenv("LARAVEL_ENV") ?: 'local';
-});
+    // print_r($filename);
+    $filename = dirname(dirname(__FILE__)) . '/ENVIRONMENT';
+    if (file_exists($filename)) {
+        $environment = file_get_contents($filename);
+        $environment = trim($environment);
 
+        return $environment;
+    }
+    return 'local';
+});
 /*
 |--------------------------------------------------------------------------
 | Bind Paths
