@@ -26,10 +26,12 @@ Route::post('auth/user', function() {
 Route::post('auth/superuser', function() {
     // TODO: superuser validation will be answer bad request
     // as if there is a superuser it will not need ACL check
+    Log::info("Superuser: ", Input::all());
     return Response::make('', 400);
 });
 
 Route::post('auth/acl', function() {
+    Log::info("ACL: ", Input::all());
     return Response::make('', 200);
 });
 
@@ -45,6 +47,7 @@ Route::group(['before'=>'auth'], function() {
     Route::post('profile/upload', ['uses' => 'UserController@uploadImage']);
 
     Route::get('dashboard/devices', ['uses' => 'DeviceController@page']);
+    Route::get('devices/{id}/commands', ['uses' => 'DeviceController@getCommands']);
     Route::resource('devices', 'DeviceController', $except);
 
     Route::get('dashboard/templates', ['uses'=>'TemplateController@page']);
@@ -59,6 +62,22 @@ Route::group(['before'=>'auth'], function() {
      */
     Route::get('real-time', function() {
         return View::make('home.real');
+    });
+
+    Route::get('mqtt-publish', function() {
+        $topic = Input::get('topic');
+        $message = Input::get('message');
+        $body = [
+            'topic' => $topic,
+            'message' => $message
+        ];
+
+        $a = \Httpful\Request::post('http://localhost:9999/mqtt/publish')
+        ->sendsJson()
+        ->body(json_encode($body))
+        ->send();
+
+        return $a;
     });
 
 });

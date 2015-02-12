@@ -6,10 +6,16 @@
     </h4>
     <table>
       <tr>
-        <td><b>Product ID</b></td><td>{{model.product_id}}</td>
+        <td><b>Serial Number</b></td><td style="font-family: monospace">{{model.serial_number}}</td>
       </tr>
       <tr>
-        <td><b>Device Secret</b>&nbsp;&nbsp;</td><td>{{model.device_secret}}</td>
+        <td><b>Device Secret</b>&nbsp;&nbsp;</td><td style="font-family: monospace">{{model.device_secret}}</td>
+      </tr>
+      <tr>
+        <td><b>MQTT-PUB Key</b>&nbsp;&nbsp;</td><td style="font-family: monospace">{{model.pub_key}}</td>
+      </tr>
+      <tr>
+        <td><b>MQTT-SUB Key</b>&nbsp;&nbsp;</td><td style="font-family: monospace">{{model.sub_key}}</td>
       </tr>
     </table>
     <button title="Edit" class="btn btn-light edit"

@@ -42,8 +42,10 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
 
         $device = $this->newModelInstance();
         $device->name = $data['name'];
-        $device->uuid = GUID::generate();
+        $device->serial_number = GUID::generate();
         $device->device_secret = GUID::generate();
+        $device->pub_key = GUID::generate();
+        $device->sub_key = GUID::generate();
         $device->description = $data['description'];
         $device->is_public = $data['is_public'] ? true : false;
         $device->template_id = $template_id ?: null;

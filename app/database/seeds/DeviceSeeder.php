@@ -7,8 +7,10 @@ class DeviceSeeder extends Seeder {
         for($i = 1; $i <= 10; $i++) {
             $devices[] = [
                 'id'=>$i,
-                'uuid'=>GUID::generate(),
+                'serial_number'=>GUID::generate(),
                 'device_secret'=>GUID::generate(),
+                'pub_key' => GUID::generate(),
+                'sub_key' => GUID::generate(),
                 'name'=>"Device $i",
                 'description'=>"device yeah number $i",
                 'is_public'=>true,

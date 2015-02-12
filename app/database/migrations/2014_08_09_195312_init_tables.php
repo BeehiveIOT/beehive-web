@@ -64,10 +64,11 @@ class InitTables extends Migration {
 		});
 		Schema::create('devices', function($t) {
 			$t->increments('id');
-			$t->string('uuid');
+			$t->string('serial_number');
 			$t->string('device_secret');
+			$t->string('pub_key');
+			$t->string('sub_key');
 			$t->string('name');
-			$t->string('picture_url')->default('device.png');
 			$t->string('description');
 			$t->boolean('is_public');
 			$t->integer('template_id')->unsigned()->nullable();
@@ -78,6 +79,9 @@ class InitTables extends Migration {
 		});
 		Schema::create('device_admin', function($t) {
 			$t->increments('id');
+			$t->boolean('can_read');
+			$t->boolean('can_update');
+			$t->boolean('can_delete');
 			$t->integer('user_id')->unsigned();
 			$t->integer('device_id')->unsigned();
 			$t->timestamps();

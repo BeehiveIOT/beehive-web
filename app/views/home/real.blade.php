@@ -9,7 +9,14 @@
   <h1>Real Time PoC</h1>
   <div id="myChart" class="epoch category10b" style="width: 800px; height: 200px"></div>
   <hr>
+  <div id="map-canvas"></div>
 </div>
+@stop
+
+@section('styles')
+<style type="text/css" media="screen">
+   #map-canvas { height: 100%; margin: 0; padding: 0;}
+</style>
 @stop
 
 @section('scripts')
@@ -63,7 +70,7 @@
     // });
 
     x.on('error', function(err) {
-      console.log('TEST ERROR');
+      console.log('TEST ERROR', err);
     });
 
     x.connect();

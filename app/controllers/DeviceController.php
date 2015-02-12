@@ -26,7 +26,7 @@ class DeviceController extends BaseController {
 
 	public function index()
 	{
-		$columns = ['devices.id', 'name', 'description', 'picture_url'];
+		$columns = ['devices.id', 'name', 'description'];
 		$devices = $this->deviceRepo->getAllByUser(Auth::id(), $columns);
 
 		return Response::json($devices, 200);
@@ -52,7 +52,7 @@ class DeviceController extends BaseController {
 
 	public function show($id)
 	{
-		$columns = ['devices.id', 'name', 'description', 'template_id', 'uuid as product_id', 'device_secret', 'is_public'];
+		$columns = ['devices.id', 'name', 'description', 'template_id', 'serial_number', 'device_secret', 'pub_key', 'sub_key', 'is_public'];
 		if (!$device = $this->deviceRepo->getByUser($id, Auth::id(), $columns)) {
 			return Response::json(['status'=>['Device not found']], 404);
 		}
@@ -86,5 +86,10 @@ class DeviceController extends BaseController {
 		return Response::json([
 			'status' => 'Not implemented'
 		], 400);
+	}
+
+	public function getCommands($id) {
+		// TODO: return commands from device
+		return Response::json([], 200);
 	}
 }

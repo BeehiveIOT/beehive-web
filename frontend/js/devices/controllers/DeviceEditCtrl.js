@@ -13,8 +13,10 @@ angular.module('beehive')
         $scope.model.name = res.data.name;
         $scope.model.description = res.data.description;
         $scope.model.is_public = res.data.is_public;
-        $scope.model.product_id = res.data.product_id;
+        $scope.model.serial_number = res.data.serial_number;
         $scope.model.device_secret = res.data.device_secret;
+        $scope.model.pub_key = res.data.pub_key;
+        $scope.model.sub_key = res.data.sub_key;
         $scope.model.template_id = res.data.template_id;
         $scope.model.commands = res.data.commands;
       }, function(err) {});
