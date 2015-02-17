@@ -12,4 +12,6 @@ interface CommandRepo extends Repository {
     public function getByTemplate(
         $id,$template_id, array $extra=[], array $columns=['commands.*']
     );
+
+    public function executeCommand($id, array $arguments=[]);
 }

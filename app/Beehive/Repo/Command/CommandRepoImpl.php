@@ -5,19 +5,23 @@ use Illuminate\Database\Eloquent\Model;
 use Beehive\Repo\GenericRepository;
 use Beehive\Repo\Template\TemplateRepo;
 use Beehive\Repo\Argument\ArgumentRepo;
+use Beehive\Service\Bridge\Bridge;
 use \DB;
 
 class CommandRepoImpl extends GenericRepository implements CommandRepo
 {
     protected $templateRepo;
     protected $argumentRepo;
+    protected $bridge;
 
     public function __construct(
-        Model $model, TemplateRepo $templateRepo, ArgumentRepo $argRepo)
+        Model $model, TemplateRepo $templateRepo,
+        ArgumentRepo $argRepo, Bridge $bridge)
     {
         $this->model = $model;
         $this->templateRepo = $templateRepo;
         $this->argumentRepo = $argRepo;
+        $this->bridge = $bridge;
     }
 
     public function getAllByTemplate(
@@ -95,5 +99,13 @@ class CommandRepoImpl extends GenericRepository implements CommandRepo
         }
 
         return parent::delete($id);
+    }
+
+    public function executeCommand($id, array $arguments=[])
+    {
+        // TODO: check permission
+        $command = parent::get($id);
+
+        $this->bridge->publish('car/command', $command->short_cmd);
     }
 }

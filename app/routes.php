@@ -63,6 +63,7 @@ Route::group(['before'=>'auth'], function() {
     Route::get('real-time', function() {
         return View::make('home.real');
     });
+    Route::post('real-time/publish-command', ['uses' => 'RealTimeController@publishCommand']);
 
     Route::get('mqtt-publish', function() {
         $topic = Input::get('topic');

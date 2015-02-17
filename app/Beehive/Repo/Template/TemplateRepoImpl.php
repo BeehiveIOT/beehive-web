@@ -40,7 +40,7 @@ class TemplateRepoImpl extends GenericRepository implements TemplateRepo {
 
         $template = parent::newModelInstance();
         $template->name = $data['name'];
-        $template->description = $data['description'];
+        $template->description = isset($data['description'])? $data['description'] : '';
         $template->user_id= $user_id;
         $template->save();
 

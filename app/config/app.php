@@ -126,6 +126,7 @@ return array(
 		// Internal Beehive Service provider
 		'Beehive\Repo\RepoServiceProvider',
 		'Beehive\Service\Validation\ValidationServiceProvider',
+		'Beehive\Service\Bridge\BridgeServiceProvider',
 	),
 
 	/*

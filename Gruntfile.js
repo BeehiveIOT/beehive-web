@@ -30,6 +30,10 @@ module.exports = function(grunt) {
         src: ['./frontend/js/templates/**/*.js'],
         dest: './public/assets/js/templates.js'
       },
+      realTime: {
+        src: ['./frontend/js/real-time/**/*.js'],
+        dest: './public/assets/js/real-time.js'
+      },
       // upload: {
       //   src: [
       //     './frontend/js/upload/jquery.ui.widget.js',

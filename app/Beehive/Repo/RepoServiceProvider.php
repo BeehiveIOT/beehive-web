@@ -33,7 +33,8 @@ class RepoServiceProvider extends ServiceProvider {
             return new CommandRepoImpl(
                 new Command(),
                 $app->make('Beehive\Repo\Template\TemplateRepo'),
-                $app->make('Beehive\Repo\Argument\ArgumentRepo')
+                $app->make('Beehive\Repo\Argument\ArgumentRepo'),
+                $app->make('Beehive\Service\Bridge\Bridge')
             );
         });
 
