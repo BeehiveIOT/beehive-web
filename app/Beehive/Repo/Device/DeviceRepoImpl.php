@@ -66,7 +66,7 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
 
         $device->name = $data['name'];
         $device->description = $data['description'];
-        $device->is_public = $data['is_public'];
+        $device->is_public = $data['is_public'] ? true : false;
         $device->save();
 
         return $device;

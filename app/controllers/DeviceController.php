@@ -24,6 +24,12 @@ class DeviceController extends BaseController {
 		return View::make('device.index');
 	}
 
+	public function device($id)
+	{
+		return View::make('device.panel')
+			->with('deviceId', $id);
+	}
+
 	public function index()
 	{
 		$columns = ['devices.id', 'name', 'description'];
@@ -74,7 +80,7 @@ class DeviceController extends BaseController {
 			$extra = ['user_id'=>Auth::id()];
 			$device = $this->deviceRepo->update($id, $data, $extra);
 
-			return Response::json(['id'=>$device->id], 200);
+			return Response::json($device, 200);
 		}
 		catch(BeehiveException $e) {
 			return Response::json(['status'=>[$e->getMessage()]], $e->getCode());

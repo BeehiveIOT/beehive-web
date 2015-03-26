@@ -5,7 +5,8 @@ module.exports = function(grunt) {
     clean: {
       main: ['./public/assets/js', './public/assets/css'],
       css: ['./public/assets/css/main.css'],
-      js: ['./public/assets/js']
+      js: ['./public/assets/js'],
+      react: ['./public/assets/js/react']
     },
     /**
      * All javascripts are concatenated in one main.js file
@@ -33,6 +34,14 @@ module.exports = function(grunt) {
       realTime: {
         src: ['./frontend/js/real-time/**/*.js'],
         dest: './public/assets/js/real-time.js'
+      },
+      devicePanel: {
+        src: [
+          './public/assets/js/devicePanel/actions/*.js',
+          './public/assets/js/devicePanel/stores/*.js',
+          './public/assets/js/devicePanel/*.js'
+        ],
+        dest: './public/assets/js/devicePanel.js'
       },
       // upload: {
       //   src: [
@@ -88,9 +97,25 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: './public/assets/js',
-          src: '**/*.js',
+          // src: '**/*.js',
+          src: '*.js',
           dest: './public/assets/js',
           ext: '.min.js'
+        }]
+      }
+    },
+    /**
+     * Converts all React JS .jsx files to js files
+     */
+    react: {
+      dynamic_mappings: {
+        // React modules
+        files: [{
+          expand: true,
+          cwd: './frontend/js/devicePanel',
+          src: ['**/*.jsx'],
+          dest: './public/assets/js/devicePanel',
+          ext: '.js'
         }]
       }
     },
@@ -116,6 +141,12 @@ module.exports = function(grunt) {
           './frontend/css/**/*.{scss,sass}'
         ],
         tasks: ['compass', 'clean:css', 'cssmin']
+      },
+      react: {
+        files: [
+          './frontend/js/**/*.jsx'
+        ],
+        tasks: ['react', 'concat']
       }
     },
   });
@@ -127,13 +158,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-react');
 
   grunt.registerTask('build', [
     'clean:main',
     'compass',
     'cssmin',
+    'react',
     'concat',
-    'uglify:modules'
+    'uglify:modules',
   ]);
   grunt.registerTask('default', ['build', 'watch']);
 };

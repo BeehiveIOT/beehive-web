@@ -47,6 +47,7 @@ Route::group(['before'=>'auth'], function() {
     Route::post('profile/upload', ['uses' => 'UserController@uploadImage']);
 
     Route::get('dashboard/devices', ['uses' => 'DeviceController@page']);
+    Route::get('dashboard/devices/{id}', ['uses' => 'DeviceController@device']);
     Route::get('devices/{id}/commands', ['uses' => 'DeviceController@getCommands']);
     Route::resource('devices', 'DeviceController', $except);
 

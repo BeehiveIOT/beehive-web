@@ -17,7 +17,7 @@
         </div>
         <ul class="device-list">
           <li ng-repeat="device in fdevices =  (devices|filter:search)">
-            <a href="#/{{device.id}}/edit">
+            <a href="/dashboard/devices/{{device.id}}">
               <h4>{{device.name}}</h4>
               <span>{{device.description}}</span>
               <img src="/uploads/avatars/device.png" alt="">
