@@ -19,8 +19,8 @@ Thumbs.db
 
 # frontend stuff
 /public/assets/css/*.css
-/public/assets/js/*.js
-/public/assets/js/*/*.js
+# /public/assets/js/*.js
+/public/assets/js/
 
 # Sublime stuff
 *.sublime-project
