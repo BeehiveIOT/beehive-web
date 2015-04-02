@@ -8,7 +8,7 @@ class HttpPublishBridge implements Bridge
     {
         $body = [
             'topic' => $topic,
-            'payload' => $data
+            'payload' => $data,
         ];
 
         try {

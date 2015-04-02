@@ -3,20 +3,24 @@
 use Beehive\Repo\Device\DeviceRepo;
 use Beehive\Service\Validation\DeviceValidator;
 use Beehive\Repo\Command\CommandRepo;
+use Beehive\Repo\DataStream\DataStreamRepo;
 
 class DeviceController extends BaseController {
 	protected $deviceRepo;
 	protected $commandRepo;
 	protected $validator;
+	protected $dataStreamRepo;
 
 	public function __construct(
 		DeviceRepo $deviceRepo,
 		DeviceValidator $validator,
-		CommandRepo $commandRepo)
+		CommandRepo $commandRepo,
+		DataStreamRepo $dataStreamRepo)
 	{
 		$this->deviceRepo = $deviceRepo;
 		$this->validator = $validator;
 		$this->commandRepo = $commandRepo;
+		$this->dataStreamRepo = $dataStreamRepo;
 	}
 
 	public function page()
@@ -94,8 +98,20 @@ class DeviceController extends BaseController {
 		], 400);
 	}
 
-	public function getCommands($id) {
+	public function getCommands($id)
+	{
 		// TODO: return commands from device
 		return Response::json([], 200);
+	}
+
+	public function getDataStreams($id)
+	{
+		if (!$device = $this->deviceRepo->getByUser($id, Auth::id())) {
+			return Response::json(['status' => ['Device not found']], 404);
+		}
+
+		$dataStreams = $this->dataStreamRepo->getByTemplate($device->template_id);
+
+		return Response::json($dataStreams, 200);
 	}
 }

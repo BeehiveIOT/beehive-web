@@ -22,8 +22,8 @@ class RealTimeController extends BaseController
             ], 400);
         }
 
-        $this->commandRepo->executeCommand(Input::get('command_id'));
+        $result = $this->commandRepo->executeCommand(Input::get('command_id'));
 
-        return Response::json(['status'=>'ok'], 200);
+        return Response::json($result, 200);
     }
 }

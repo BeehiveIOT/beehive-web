@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"nathanmac/laravel-guid": "dev-master",
-		"nategood/httpful": "*"
+		"nategood/httpful": "*",
+		"nesbot/carbon": "~1.14"
 	},
 	"autoload": {
 		"classmap": [

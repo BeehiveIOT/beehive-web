@@ -105,7 +105,11 @@ class CommandRepoImpl extends GenericRepository implements CommandRepo
     {
         // TODO: check permission
         $command = parent::get($id);
+        $data = [
+            'cmd' => $command->short_cmd,
+            'time' => \Carbon\Carbon::now()->timestamp
+        ];
 
-        $this->bridge->publish('car/command', $command->short_cmd);
+        $this->bridge->publish('car/command', $data);
     }
 }

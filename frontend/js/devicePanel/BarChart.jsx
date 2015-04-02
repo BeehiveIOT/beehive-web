@@ -1,7 +1,7 @@
-(function($) {
-  var LineChart = React.createClass({
+(function($){
+  var BarChart = React.createClass({
     getInitialState: function() {
-      var id = 'LineChart-' + (Math.random()+'').substring(2, 5);
+      var id = 'BarChart-' + (Math.random()+'').substring(2, 5);
       this.chartData = [];
       this.count = 0;
       return {
@@ -18,11 +18,7 @@
       this.chartData.push([this.count, data]);
       this.count++;
 
-      this.state.chart.setData([{
-        data: this.chartData,
-        points: { show: true },
-        lines: { show: true }
-      }]);
+      this.state.chart.setData([{data: this.chartData, bars: {show: true}}]);
       this.state.chart.setupGrid();
       this.state.chart.draw();
     },
@@ -33,8 +29,7 @@
 
       var plot = $.plot(id, [{
         data: this.chartData,
-        points: { show: true },
-        lines: { show: true }
+        bars: { show: true }
       }], {
         xaxis: { show: false }
       });
@@ -49,5 +44,6 @@
       );
     }
   });
-  window.LineChart = LineChart;
-}).call(this, jQuery);
+
+  window.BarChart = BarChart;
+}).call(document, jQuery);

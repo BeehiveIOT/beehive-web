@@ -49,6 +49,7 @@ Route::group(['before'=>'auth'], function() {
     Route::get('dashboard/devices', ['uses' => 'DeviceController@page']);
     Route::get('dashboard/devices/{id}', ['uses' => 'DeviceController@device']);
     Route::get('devices/{id}/commands', ['uses' => 'DeviceController@getCommands']);
+    Route::get('devices/{id}/datastreams', ['uses' => 'DeviceController@getDataStreams']);
     Route::resource('devices', 'DeviceController', $except);
 
     Route::get('dashboard/templates', ['uses'=>'TemplateController@page']);
@@ -84,7 +85,8 @@ Route::group(['before'=>'auth'], function() {
 
 });
 Route::get('design', function() {
-    return View::make('home.design');
+    // return View::make('home.design');
+    return \Carbon\Carbon::now()->timestamp;
 });
 
 Route::group(['prefix' => 'api/v1'], function() {

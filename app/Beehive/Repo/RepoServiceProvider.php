@@ -8,12 +8,14 @@ use Beehive\Repo\Command\CommandRepoImpl;
 use Beehive\Repo\Argument\ArgumentRepoImpl;
 use Beehive\Repo\User\UserRepoImpl;
 use Beehive\Repo\Auth\AuthRepoImpl;
+use Beehive\Repo\DataStream\DataStreamRepoImpl;
 use Device;
 use Template;
 use Command;
 use Argument;
 use User;
 use RestToken;
+use DataStream;
 
 class RepoServiceProvider extends ServiceProvider {
     public function register(){
@@ -51,6 +53,10 @@ class RepoServiceProvider extends ServiceProvider {
             $userRepo = $app->make('Beehive\Repo\User\UserRepo');
 
             return new AuthRepoImpl(new RestToken(), $userRepo, $expiration_time);
+        });
+
+        $app->bind('Beehive\Repo\DataStream\DataStreamRepo', function($app) {
+            return new DataStreamRepoImpl(new DataStream());
         });
 
     }
