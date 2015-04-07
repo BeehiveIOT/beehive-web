@@ -36,6 +36,7 @@
 <script src="{{asset('assets/vendors/js/reflux.min.js')}}"></script>
 <script src="{{asset('assets/vendors/js/sockjs-0.3.4.min.js')}}"></script>
 <script src="{{asset('assets/vendors/js/jquery.flot.min.js')}}"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 <script src="{{asset('assets/foobar.js')}}"></script>
 <script src="{{asset('assets/js/frontpage.js')}}"></script>
 <script src="{{asset('assets/js/devicePanel.js')}}"></script>
