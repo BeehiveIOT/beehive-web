@@ -35,6 +35,7 @@ class CommandRepoImpl extends GenericRepository implements CommandRepo
         }
 
         return $this->model
+            ->with('arguments')
             ->where('template_id', '=', $template_id)
             ->get($columns)
             ->all();
@@ -101,15 +102,61 @@ class CommandRepoImpl extends GenericRepository implements CommandRepo
         return parent::delete($id);
     }
 
-    public function executeCommand($id, array $arguments=[])
+    public function executeCommand($id, $topic, array $arguments=[])
     {
-        // TODO: check permission
-        $command = parent::get($id);
-        $data = [
-            'cmd' => $command->short_cmd,
-            'time' => \Carbon\Carbon::now()->timestamp
-        ];
+        $commandArguments = $this->argumentRepo->getByCommand($id);
+        $argumentData = [];
+        foreach($arguments as $item) {
+            $item['valid'] = false;
+            $value = isset($item['value']) ? $item['value'] : '';
 
-        $this->bridge->publish('car/command', $data);
+            foreach($commandArguments as $argument) {
+                if ($argument->id == $item['argument_id']) {
+                    if ($argument->type == 'number') {
+                        if (!$this->isFloat($value)) {
+                            // print_r($argument->id .' -> not float = ' . gettype($value) . '->' . $value . '<br>');
+                            break;
+                        }
+                        $value = floatval($value);
+                        if ($value > $argument->maximum || $value < $argument->minimum) {
+                            // print_r($argument->id .' -> not range');
+                            break;
+                        }
+                        $item['value'] = $value;
+                    } else if ($argument->type == 'string') {
+                        if (!$value) {
+                            print_r($argument->id .' -> set default');
+                            $item['value'] = $argument->default;
+                        }
+                    }
+                    $item['valid'] = true;
+                    $argumentData[$argument->name] = $item['value'];
+                    break;
+                }
+            }
+            if (!$item['valid']) {
+                return 0;
+            }
+        }
+
+        $command = parent::get($id);
+        $data = [];
+        $data['cmd'] = $command->short_cmd;
+        foreach($argumentData as $key => $value) {
+            $data[$key] = $value;
+        }
+        $data['time'] = \Carbon\Carbon::now()->timestamp;
+
+
+        $this->bridge->publish($topic, $data);
+        return $data['time'];
     }
+
+    private function isFloat($value)
+    {
+        preg_match('/^-?(?:\d+|\d*\.\d+)$/', $value, $matches);
+
+        return count($matches) > 0;
+    }
+
 }

@@ -13,5 +13,5 @@ interface CommandRepo extends Repository {
         $id,$template_id, array $extra=[], array $columns=['commands.*']
     );
 
-    public function executeCommand($id, array $arguments=[]);
+    public function executeCommand($id, $topic, array $arguments=[]);
 }

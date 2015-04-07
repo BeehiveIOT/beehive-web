@@ -22,12 +22,7 @@
   <div class="col-md-3">
     <div class="panel panel-dark">
       <div class="panel-heading"><b>Device Commands</b></div>
-      <div class="panel-body">
-        <!-- TODO: give funcitonality, something like, execute command -->
-        <ul>
-          <li>:command.name:</li>
-        </ul>
-      </div>
+      <div class="panel-body" id="command-panel"></div>
     </div>
   </div>
 </div>

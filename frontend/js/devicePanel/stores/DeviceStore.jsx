@@ -9,6 +9,7 @@
       $http.get('/devices/'+deviceId).then(function(res){
         this.device = res;
         this.trigger('loaded', this.device);
+        CommandActions.setCommands(this.device.commands);
       }.bind(this), function(err){});
     },
     onUpdate: function(deviceId, device) {

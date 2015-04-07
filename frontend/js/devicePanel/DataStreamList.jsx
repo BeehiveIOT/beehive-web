@@ -1,10 +1,4 @@
 (function($) {
-    // mixins: [
-    //   Reflux.listenTo(DeviceStore, 'onDeviceChange'),
-    //   Reflux.listenTo(DataStreamStore, 'onReceiveMessage'),
-    //   Reflux.listenTo(DataStreamInfoStore, 'onDataStreamInfoChange'),
-    // ],
-    //
   var DataStreamList = React.createClass({
     mixins: [
       Reflux.listenTo(window.DeviceStore, 'onDeviceChange'),

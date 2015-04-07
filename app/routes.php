@@ -50,6 +50,7 @@ Route::group(['before'=>'auth'], function() {
     Route::get('dashboard/devices/{id}', ['uses' => 'DeviceController@device']);
     Route::get('devices/{id}/commands', ['uses' => 'DeviceController@getCommands']);
     Route::get('devices/{id}/datastreams', ['uses' => 'DeviceController@getDataStreams']);
+    Route::post('devices/{id}/commands/{commandId}/execute', ['uses' => 'DeviceController@executeCommand']);
     Route::resource('devices', 'DeviceController', $except);
 
     Route::get('dashboard/templates', ['uses'=>'TemplateController@page']);

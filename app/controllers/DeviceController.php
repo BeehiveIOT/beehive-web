@@ -62,7 +62,11 @@ class DeviceController extends BaseController {
 
 	public function show($id)
 	{
-		$columns = ['devices.id', 'name', 'description', 'template_id', 'serial_number', 'device_secret', 'pub_key', 'sub_key', 'is_public'];
+		$columns = ['devices.id', 'name', 'description',
+			'template_id', 'serial_number',
+			'device_secret', 'pub_key',
+			'sub_key', 'is_public'
+		];
 		if (!$device = $this->deviceRepo->getByUser($id, Auth::id(), $columns)) {
 			return Response::json(['status'=>['Device not found']], 404);
 		}
@@ -100,8 +104,12 @@ class DeviceController extends BaseController {
 
 	public function getCommands($id)
 	{
-		// TODO: return commands from device
-		return Response::json([], 200);
+		if (!$device = $this->deviceRepo->getByUser($id, Auth::id())) {
+			return Response::json(['status' => ['Device not found']], 404);
+		}
+		$commands = $this->commandRepo->getAllByTemplate($device->template_id);
+
+		return Response::json($commands, 200);
 	}
 
 	public function getDataStreams($id)
@@ -113,5 +121,25 @@ class DeviceController extends BaseController {
 		$dataStreams = $this->dataStreamRepo->getByTemplate($device->template_id);
 
 		return Response::json($dataStreams, 200);
+	}
+
+	public function executeCommand($id, $commandId)
+	{
+		if (!$device = $this->deviceRepo->getByUser($id, Auth::id())) {
+			return Response::json(['status' => ['Device not found']], 404);
+		}
+		// $templateId = $device->template_id;
+		// $extra = ['user_id' => Auth::id()];
+		// if (!$command = $this->commandRepo->getByTemplate($commandId, $templateId, $extra)) {
+		// 	return Response::json(['status' => ['Command not found']], 404);
+		// }
+		$topic = $device->sub_key . '/command';
+		$arguments = Input::get('arguments', []);
+		$timestamp = $this->commandRepo->executeCommand($commandId, $topic, $arguments);
+
+		return Response::json([
+			'command_id' => $commandId,
+			'timestamp' => $timestamp
+		], 200);
 	}
 }
