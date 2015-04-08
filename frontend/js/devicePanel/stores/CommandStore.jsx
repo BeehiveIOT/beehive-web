@@ -20,6 +20,12 @@
       var url = '/devices/' + deviceId + '/commands/' + commandId + '/execute';
       $http.post(url, arguments).then(function(res) {
         console.log('command:',res.command_id, 'timestamp', res.timestamp);
+        ExecutionLogActions.saveCommandExecution({
+          timestamp: res.timestamp,
+          commandId: res.command_id,
+          commandName: res.command_name,
+          status: 'sent'
+        });
       }, function(err){});
     }
   });

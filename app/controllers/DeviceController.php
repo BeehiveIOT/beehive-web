@@ -133,12 +133,17 @@ class DeviceController extends BaseController {
 		// if (!$command = $this->commandRepo->getByTemplate($commandId, $templateId, $extra)) {
 		// 	return Response::json(['status' => ['Command not found']], 404);
 		// }
+		if (!$command = $this->commandRepo->get($commandId)) {
+			return Response::json(['status' => ['Command not found']], 404);
+		}
+
 		$topic = $device->sub_key . '/command';
 		$arguments = Input::get('arguments', []);
 		$timestamp = $this->commandRepo->executeCommand($commandId, $topic, $arguments);
 
 		return Response::json([
 			'command_id' => $commandId,
+			'command_name' => $command->name,
 			'timestamp' => $timestamp
 		], 200);
 	}

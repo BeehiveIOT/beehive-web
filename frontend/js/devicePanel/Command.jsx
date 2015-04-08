@@ -18,6 +18,7 @@
       }
 
       CommandActions.execute(this.props.command.id, this.props.deviceId, result);
+      this.hideArguments();
     },
     render: function() {
       var arguments = this.props.command.arguments.map(function(item) {
