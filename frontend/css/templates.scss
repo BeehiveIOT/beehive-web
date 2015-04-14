@@ -45,11 +45,18 @@
   }
 }
 .template-edit {
+  position: relative;
   border: 1px solid #CCCCCC;
   padding: 8px;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+  }
 }
 .argument {
   .btn {

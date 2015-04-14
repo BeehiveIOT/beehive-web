@@ -15,14 +15,14 @@ class TemplateController extends \BaseController {
 		$this->validator = $validator;
 	}
 
-	public function page()
+	public function page($uri='')
 	{
 		return View::make('template.index');
 	}
 
 	public function index() {
 		$columns = ['id', 'name', 'description'];
-		$templates = $this->templateRepo->getAllByUser(Auth::id(), $columns, 'commands');
+		$templates = $this->templateRepo->getAllByUser(Auth::id(), $columns, ['commands', 'dataStreams']);
 
 		return Response::json($templates, 200);
 	}

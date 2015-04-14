@@ -43,6 +43,16 @@ module.exports = function(grunt) {
         ],
         dest: './public/assets/js/devicePanel.js'
       },
+      templates2: {
+        src: [
+          './public/assets/js/templates2/actions/*.js',
+          './public/assets/js/templates2/stores/*.js',
+          './public/assets/js/templates2/components/*.js',
+          './public/assets/js/templates2/views/*.js',
+          './public/assets/js/templates2/*.js'
+        ],
+        dest: './public/assets/js/templates2.js'
+      },
       // upload: {
       //   src: [
       //     './frontend/js/upload/jquery.ui.widget.js',
@@ -115,6 +125,12 @@ module.exports = function(grunt) {
           cwd: './frontend/js/devicePanel',
           src: ['**/*.jsx'],
           dest: './public/assets/js/devicePanel',
+          ext: '.js'
+        }, {
+          expand: true,
+          cwd: './frontend/js/templates2',
+          src: ['**/*.jsx'],
+          dest: './public/assets/js/templates2',
           ext: '.js'
         }]
       }

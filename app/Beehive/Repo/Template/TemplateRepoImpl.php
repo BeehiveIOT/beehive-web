@@ -10,9 +10,10 @@ class TemplateRepoImpl extends GenericRepository implements TemplateRepo {
         $this->model = $model;
     }
 
-    public function getAllByUser($user_id, array $columns=['templates.*'], $relation="") {
+    public function getAllByUser($user_id, array $columns=['templates.*'], array $relations=[]) {
         $query = $this->model->where('user_id', '=', $user_id);
-        if (strlen($relation) > 0) {
+
+        foreach($relations as $relation) {
             $query->with($relation);
         }
 

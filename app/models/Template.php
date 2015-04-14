@@ -27,6 +27,10 @@ class Template extends Eloquent {
         return $this->hasMany('Command');
     }
 
+    public function dataStreams() {
+        return $this->hasMany('DataStream');
+    }
+
     public function getIdAttribute($value) {
         return (int)$value;
     }

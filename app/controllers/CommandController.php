@@ -51,9 +51,22 @@ class CommandController extends \BaseController
 		return Response::json($command, 200);
 	}
 
-	public function update($id)
+	public function update($templateId, $commandId)
 	{
-		//
+		$data = Input::all();
+		if (!$this->cmdValidator->with($data)->passes()) {
+			return Response::json($this->cmdValidator->errors(), 400);
+		}
+
+		try {
+			$extra = ['userId' => Auth::id(), 'templateId' => $templateId];
+			$command = $this->commandRepo->update($commandId, $data, $extra);
+
+			return Response::json($command, 200);
+		} catch(Exception $e) {
+			return Response::json(['status'=>[$e->getMessage()]], 400);
+		}
+
 	}
 
 	public function destroy($templateId, $commandId)

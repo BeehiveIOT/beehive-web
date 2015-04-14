@@ -29,7 +29,7 @@ class CommandRepoImpl extends GenericRepository implements CommandRepo
     {
         if (isset($user_id)) {
             $user_id = $extra['user_id'];
-            if(!$this->templateRepo->isOwner($template_id, $user_id)) {
+            if(!$this->templateRepo->isOwner($user_id, $template_id)) {
                 return [];
             }
         }
@@ -46,7 +46,7 @@ class CommandRepoImpl extends GenericRepository implements CommandRepo
     {
         if (isset($user_id)) {
             $user_id = $extra['user_id'];
-            if(!$this->templateRepo->isOwner($template_id, $user_id)) {
+            if(!$this->templateRepo->isOwner($user_id, $template_id)) {
                 return null;
             }
         }
@@ -86,6 +86,27 @@ class CommandRepoImpl extends GenericRepository implements CommandRepo
             }
         });
         DB::commit();
+
+        return $command;
+    }
+
+    public function update($id, array $data, array $extra=[])
+    {
+        $templateId = $extra['templateId'];
+        $userId = $extra['userId'];
+        if (isset($userId)) {
+            if(!$this->templateRepo->isOwner($userId, $templateId)) {
+                throw new \BeehiveException('Template not available for this user.', 401);
+            }
+        }
+        if(!$command = parent::get($id)) {
+            throw new \BeehiveException('Command not found.', 404);
+        }
+
+        $command->name = $data['name'];
+        $command->short_cmd = $data['short_cmd'];
+        $command->cmd_type = $data['type'];
+        $command->save();
 
         return $command;
     }

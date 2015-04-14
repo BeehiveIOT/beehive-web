@@ -9,7 +9,7 @@ interface TemplateRepo extends Repository {
      * @param  array  $columns
      * @return array
      */
-    public function getAllByUser($user_id, array $columns=['templates.*']);
+    public function getAllByUser($user_id, array $columns=['templates.*'], array $relations=[]);
 
     /**
      * Verify if a user is the owner of the template

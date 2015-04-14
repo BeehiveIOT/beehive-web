@@ -53,7 +53,12 @@ Route::group(['before'=>'auth'], function() {
     Route::post('devices/{id}/commands/{commandId}/execute', ['uses' => 'DeviceController@executeCommand']);
     Route::resource('devices', 'DeviceController', $except);
 
-    Route::get('dashboard/templates', ['uses'=>'TemplateController@page']);
+    // Route::get('dashboard/templates', ['uses'=>'TemplateController@page']);
+    Route::any('dashboard/templates/{all?}', [
+        'uses' => 'TemplateController@page'
+    ])->where('all', '.*');
+
+
     Route::resource('templates', 'TemplateController', $except);
 
     Route::resource('templates.commands', 'CommandController', $except);
