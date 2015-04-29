@@ -57,3 +57,10 @@ fieldset[disabled] .form-control {
     }
   }
 }
+/**
+ * Placeholder color
+ */
+.form-control::-webkit-input-placeholder { color: #bbb; }
+.form-control:-moz-placeholder { color: #bbb; }
+.form-control::-moz-placeholder { color: #bbb; }
+.form-control:-ms-input-placeholder { color: #bbb; }

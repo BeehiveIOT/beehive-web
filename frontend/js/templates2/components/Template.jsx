@@ -15,7 +15,8 @@
         return <TemplateCommands template={this.props.template}
           onCancel={onCancel.bind(this)} />
       case 'dataStreams':
-        return <TemplateDataStreams />;
+        return <TemplateDataStreams template={this.props.template}
+          onCancel={onCancel.bind(this)} />;
     }
     return '';
   }

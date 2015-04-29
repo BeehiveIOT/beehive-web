@@ -10,8 +10,13 @@
     <Route name="app" path="/dashboard/templates" handler={App}>
       <Route name="list" handler={ListView} />
       <Route name="create" handler={CreateView} />
+
       <Route name="createCommand" path=":templateId/commands/create" handler={CreateCommandView} />
       <Route name="editCommand" path=":templateId/commands/:commandId" handler={CreateCommandView} />
+
+      <Route name="createDataStream" path=":templateId/datastreams/create" handler={DataStreamCreateView} />
+      <Route name="editDataStream" path=":templateId/datastreams/:dataStreamId" handler={DataStreamCreateView} />
+
       <DefaultRoute handler={ListView} />
       <NotFoundRoute handler={ListView}/>
     </Route>

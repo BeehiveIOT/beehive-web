@@ -46,7 +46,7 @@
                 <div className="row">
                   <div className="col-md-10">
                     <label for="search">Search</label>
-                    <input type="text" ng-model="search" className="form-control"
+                    <input type="text" className="form-control"
                       placeholder="Looking for a template?" />
                   </div>
                   <div className="col-md-2">
@@ -56,7 +56,7 @@
                     </Link>
                   </div>
                 </div>
-                <ul ng-repeat="template in templates | filter:search" className="template-list">
+                <ul className="template-list">
                   { templates }
                 </ul>
               </div>

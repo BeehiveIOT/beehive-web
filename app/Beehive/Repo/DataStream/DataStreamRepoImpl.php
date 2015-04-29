@@ -19,13 +19,4 @@ class DataStreamRepoImpl extends GenericRepository implements DataStreamRepo
 
         return $result;
     }
-
-    public function create(array $data, array $extra=[])
-    {
-        $topic_name = strtolower($data['name']);
-        $topic_name = str_replace(' ', '_', $topic_name);
-        $data['topic_name'] = $topic_name;
-
-
-    }
 }

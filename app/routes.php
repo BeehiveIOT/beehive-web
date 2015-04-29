@@ -53,11 +53,9 @@ Route::group(['before'=>'auth'], function() {
     Route::post('devices/{id}/commands/{commandId}/execute', ['uses' => 'DeviceController@executeCommand']);
     Route::resource('devices', 'DeviceController', $except);
 
-    // Route::get('dashboard/templates', ['uses'=>'TemplateController@page']);
-    Route::any('dashboard/templates/{all?}', [
-        'uses' => 'TemplateController@page'
-    ])->where('all', '.*');
-
+    // Route used to enable html5 history api with reactjs
+    Route::any('dashboard/templates/{all?}', ['uses' => 'TemplateController@page'])
+        ->where('all', '.*');
 
     Route::resource('templates', 'TemplateController', $except);
 
@@ -65,8 +63,11 @@ Route::group(['before'=>'auth'], function() {
 
     Route::resource('templates.commands.arguments', 'ArgumentController', $except);
 
+    Route::resource('templates.datastreams', 'DataStreamController', $except);
+
     /**
      * All this is PoC stuff gonna be removed :3
+     * TO BE REMOVED
      */
     Route::get('real-time', function() {
         return View::make('home.real');
@@ -90,6 +91,11 @@ Route::group(['before'=>'auth'], function() {
     });
 
 });
+View::composer('profile.edit', 'ViewHelper@getCountries');
+
+/**
+ * TO BE REMOVED
+ */
 Route::get('design', function() {
     // return View::make('home.design');
     return \Carbon\Carbon::now()->timestamp;
@@ -102,4 +108,3 @@ Route::group(['prefix' => 'api/v1'], function() {
     });
 });
 
-View::composer('profile.edit', 'ViewHelper@getCountries');
