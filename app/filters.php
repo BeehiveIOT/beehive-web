@@ -89,32 +89,6 @@ Route::filter('csrf', function()
 	}
 });
 
-Route::filter('rest_auth', function() {
-	$authRepo = App::make('Beehive\Repo\Auth\AuthRepo');
-	$token = Input::get('access_token');
-
-	try {
-		$authRepo->validateRestToken($token);
-	}
-	catch(BeehiveRestException $e) {
-		$response = [
-			'status' => 'REST API error'
-		];
-		$code = $e->getCode();
-		switch($code) {
-			case BeehiveRestException::INVALID_TOKEN:
-				$response['status'] = "Invalid token";
-				return Response::json($response, 401);
-
-			case BeehiveRestException::EXPIRED_TOKEN:
-				$response['status'] = "Expired token";
-				return Response::json($response, 400);
-
-			case BeehiveRestException::UNAUTHORIZED_TOKEN:
-				$response['status'] = "Unauthorized token";
-				return Response::json($response, 403);
-		}
-
-		return Response::json($response, 400);
-	}
+Route::filter('cookie-remove', function() {
+	Config::set('session.driver', 'array');
 });
