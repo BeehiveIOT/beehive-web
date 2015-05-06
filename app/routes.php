@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
-
 Route::get('/', ['uses'=>'HomeController@index']);
 Route::get('login', ['uses'=>'HomeController@login']);
 Route::post('login', ['uses'=>'HomeController@doLogin']);
@@ -91,7 +80,25 @@ Route::group(['before'=>'auth'], function() {
     });
 
 });
+
+/**
+ * REST API endpoints
+ * Authentication: json web tokens
+ */
+Route::group(['prefix' => 'api/v1', 'before' => 'cookie-remove'], function() {
+    Route::post('auth', ['uses'=>'Controllers\Rest\AuthController@authenticate']);
+
+    Route::group(['before' => 'jwt-auth'], function() {
+        Route::resource('devices', 'Controllers\Rest\DeviceController');
+        Route::resource('templates', 'Controllers\Rest\TemplateController');
+        Route::resource('templates.commands', 'Controllers\Rest\CommandController');
+        Route::resource('templates.commands.arguments', 'Controllers\Rest\ArgumentController');
+        Route::resource('templates.datastreams', 'Controllers\Rest\DataStreamController');
+    });
+});
+
 View::composer('profile.edit', 'ViewHelper@getCountries');
+
 
 /**
  * TO BE REMOVED
@@ -100,11 +107,3 @@ Route::get('design', function() {
     // return View::make('home.design');
     return \Carbon\Carbon::now()->timestamp;
 });
-
-Route::group(['prefix' => 'api/v1'], function() {
-    Route::group(['before' => 'rest_auth'], function() {
-        Route::post('auth', ['uses'=>'Controllers\Rest\AuthController@auth']);
-
-    });
-});
-

@@ -123,6 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		// Third party
 		'Nathanmac\GUID\GUIDServiceProvider',
+		'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
 		// Internal Beehive Service provider
 		'Beehive\Repo\RepoServiceProvider',
 		'Beehive\Service\Validation\ValidationServiceProvider',
@@ -193,7 +194,8 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-
+		'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+		'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
 	),
 
 );

@@ -1,7 +1,7 @@
 <?php
 class Template extends Eloquent {
     protected $table = 'templates';
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['user_id', 'created_at', 'updated_at'];
 
     /**
      * Returns the owner user
