@@ -45,14 +45,8 @@
               <div className="panel-body">
                 <div className="row">
                   <div className="col-md-10">
-                    <label for="search">Search</label>
-                    <input type="text" className="form-control"
-                      placeholder="Looking for a template?" />
-                  </div>
-                  <div className="col-md-2">
-                    <br />
                     <Link to="create" className="btn btn-light">
-                      <i className="fa fa-plus"></i>
+                      <i className="fa fa-plus"></i> Add new Template
                     </Link>
                   </div>
                 </div>
