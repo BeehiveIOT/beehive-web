@@ -60,6 +60,14 @@ class DeviceController extends BaseController {
 		}
 	}
 
+	public function getByTemplate($templateId) {
+		$columns = ['devices.id', 'name', 'description'];
+		$extra = ['userId' => Auth::id()];
+		$devices = $this->deviceRepo->getByTemplate($templateId, $columns, $extra);
+
+		return Response::json($devices, 200);
+	}
+
 	public function show($id)
 	{
 		$columns = ['devices.id', 'name', 'description',

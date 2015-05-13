@@ -14,6 +14,9 @@ angular.module('beehive')
       },
       update: function(data) {
         return $http.put('/devices/'+data.id, data);
+      },
+      getByTemplate: function(templateId) {
+        return $http.get('/templates/' + templateId + '/devices');
       }
     };
   }

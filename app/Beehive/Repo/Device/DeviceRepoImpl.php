@@ -32,6 +32,16 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
             ->first($columns);
     }
 
+    public function getByTemplate($templateId, array $columns=['devices.*'], array $extra)
+    {
+        $userId = $extra['userId'];
+
+        return $this->model
+            ->join('device_admin as da', 'da.device_id', '=', 'devices.id')
+            ->where('devices.template_id', '=', $templateId)
+            ->where('da.user_id', '=', $userId)
+            ->get($columns);
+    }
 
     public function create(array $data, array $extra=[]) {
         $template_id = $data['template_id'];
