@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>Beehive | @yield('title', 'Open Source Internet Of Things Platform')</title>
 @if (App::environment('local'))
   <link rel="stylesheet" href="{{asset('assets/vendors/css/bootstrap.min.css')}}">
@@ -19,8 +20,41 @@
 
 @include('widgets.navbar')
 
-<div class="wrapper">
-  @yield('content')
+<div id="wrapper">
+<!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li>
+        <a href="#">Dashboard</a>
+      </li>
+      <li>
+        <a href="#">Manage Devices</a>
+      </li>
+      <li>
+        <a href="#">Manage Templates</a>
+      </li>
+      <li>
+        <a href="#">Shared Devices</a>
+      </li>
+      <li>
+        <a href="#">History Data</a>
+      </li>
+      <li>
+        <a href="#">Services</a>
+      </li>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    </ul>
+  </div>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      @yield('content')
+    </div>
+  </div>
 </div>
 <div class="message-log" id="messages" my-messages>
 @if($errors->has())
@@ -57,6 +91,12 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 @endif
 <script src="{{asset('assets/vendors/js/bootstrap.min.js')}}"></script>
+<script type="text/javascript">
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+</script>
 {{-- Scripts --}}
 @yield('scripts')
 {{-- Templates --}}

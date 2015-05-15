@@ -1,120 +1,128 @@
 @import '_variables';
 @import '_mixins';
 
-.navbar-custom {
-  background-color: $mingrgba;
-  border-color: $gray;
+$bgDefault      : #26C566;
+$bgHighlight    : $bgDefault;
+$colDefault     : #f00;
+$colHighlight   : #0f0;
+$bgNavbarInputForm: #fff;
+$navbarLinkBorder: #00f;
 
-  .dropdown {
-    margin-right: 20px;
-  }
-  .navbar-right {
-    &.no-auth {
-      li {
-        >a {
-          margin-right: 15px;
-        }
-      }
-    }
-  }
+.navbar-beehive {
+  background-color: $bgDefault;
+  border: 0;
+  min-height: auto;
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(50, 50, 50, 0.36);
+  -moz-box-shadow:    0px 3px 6px 0px rgba(50, 50, 50, 0.36);
+  box-shadow:         0px 3px 6px 0px rgba(50, 50, 50, 0.36);
 
+  .navbar-brand-head {
+    margin-top: 20px;
+  }
   .navbar-brand {
-    color: $white;
-  }
+    color: $colDefault;
 
-  .navbar-brand:hover, .navbar-brand:focus {
-    color: $white;
-    background-color: transparent;
-  }
-
-  .navbar-text {
-    color: $white;
-  }
-
-  .navbar-toggle {
-    border: 0;
-    i {
-      color: $white;
+    &:hover, &:focus {
+      color: $colHighlight;
     }
   }
-  .navbar-toggle:hover, .navbar-toggle:focus {
-    background-color: $bluewood;
+  .navbar-text {
+    color: $colDefault;
   }
+  .navbar-form {
+    line-height: 75px;
+    height: 75px;
 
-  .navbar-collapse, .navbar-form {
-    border-color: $white;
+    input[type=text] {
+      background-color: $bgNavbarInputForm;
+    }
   }
-
-  .navbar-link {
-    color: $white;
-  }
-
-  .navbar-link:hover {
-    color: $white;
-  }
-
   .navbar-nav {
-    @include box-sizing();
     > li {
-      margin-left: 2px;
       > a {
-        color: $white;
-      }
-      > a:hover,>a:focus {
-        color: $white;
-        background-color: transparent;
-        // border-bottom: 4px solid $gyellow;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: $colDefault;
+        line-height: 100px;
+        height: 100px;
+        padding-top: 0;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding: 0 30px 0 30px;
+        @include box-sizing();
+        -webkit-transition: border-bottom 0.3s;
+            transition: border-bottom 0.3s;
+
+        &:hover,  &:focus {
+          color: $colHighlight;
+          background-color: $bgHighlight;
+          border-bottom: 4px $navbarLinkBorder solid;
+        }
       }
     }
     > .active {
-      > a {
-        // border-bottom: 4px solid $gred;
-      }
-      > a,>a:hover,>a:focus {
-        color: $white;
-        background-color: transparent;
-      }
-    }
-    > .disable {
-      > a,>a:hover,>a:focus {
-        color: $white;
-        background-color: transparent;
+      > a, > a:hover, > a:focus {
+        color: $colHighlight;
+        background-color: $bgHighlight;
       }
     }
     > .open {
-      >a,>a:hover,>a:focus {
-        color: $white;
-        background-color: transparent;
+      > a, > a:hover, > a:focus {
+        color: $colHighlight;
+        background-color: $bgHighlight;
       }
     }
   }
-}
+  .navbar-toggle {
+    border-color: $bgHighlight;
 
+    &:hover, &:focus {
+      background-color: $bgHighlight;
+    }
+    .icon-bar {
+      background-color: $colDefault;
+    }
+  }
+  .navbar-collapse,
+  .navbar-form {
+    border-color: $colDefault;
+  }
+  .navbar-link {
+    color: $colDefault;
+    &:hover {
+      color: $colHighlight;
+    }
+  }
+}
 @media (max-width: 767px) {
-  .navbar-custom {
+  .navbar-beehive {
+    .navbar-brand-head {
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+    }
     .navbar-nav {
-      .open {
-        .dropdown-menu {
-          >li {
-            >a{
-              color: #0f0;
-            }
-            >a:hover,>a:focus {
-              color: $white;
-              background-color: transparent;
-            }
+      > li > a {
+        line-height: 30px;
+        height: 30px;
+        padding: 0;
+
+        &:hover, &:focus {
+          border-bottom: 0 transparent solid;
+        }
+      }
+      .open .dropdown-menu {
+        > li > a {
+          color: $colDefault;
+          &:hover, &:focus {
+            color: $colHighlight;
           }
-          >.active {
-            >a,>a:hover,>a:focus {
-              color: $white;
-              background-color: transparent;
-            }
-          }
-          >.disabled {
-            >a,>a:hover,>a:focus {
-              color: $white;
-              background-color: transparent;
-            }
+        }
+        > .active {
+          > a, > a:hover, > a:focus, {
+            color: $colHighlight;
+            background-color: $bgHighlight;
           }
         }
       }
@@ -124,6 +132,9 @@
 
 
 
+/**
+ * Dropdowns
+ */
 .dropdown {
   position: relative;
 }
