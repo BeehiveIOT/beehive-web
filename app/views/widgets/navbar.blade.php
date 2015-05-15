@@ -15,12 +15,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="/shopping-cart" title="Carrito de Compra" class="pulse-shrink icon cart">
-            <i class="fa fa-shopping-cart"></i>
-            <span id="shopping-badge" class="badge badge-primary"></span>
-          </a>
-        </li>
+      @if(!Auth::check())
         <li class="hidden-xs">
           <a href="/register" title="Registro" class="icon">
             <i class="fa fa-user-plus"></i>
@@ -43,6 +38,25 @@
             <span class="visible-xs">Inciar Sesión</span>
           </a>
         </li>
+      @else
+        <li class="dropdown">
+        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+          <img id="navbar-profile" src="{{ViewHelper::avatar(Auth::user()->picture_url)}}" width="35px" height="35px" class='img-circle'>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="{{url('profile')}}">Profile</a></li>
+          <li class="divider"></li>
+          <li>
+            <a href="javascript:document.getElementById('logout').submit()" title="">
+              Logout
+            </a>
+          </li>
+        </ul>
+          {{Form::open(['id'=>'logout', 'url'=>'logout'])}}
+          {{Form::close()}}
+      </li>
+      @endif
       </ul>
     </div><!-- /.navbar-collapse -->
   </div>

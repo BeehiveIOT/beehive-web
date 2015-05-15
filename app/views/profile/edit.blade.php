@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-  <div class="col-md-5 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-1">
     <div class="panel panel-dark">
       <div class="panel-heading"><b>Basic Information</b></div>
       <div class="panel-body">
@@ -63,7 +63,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div class="panel panel-dark profile-upload">
       <div class="panel-heading"><b>Profile Picture</b></div>
       <div class="panel-body">

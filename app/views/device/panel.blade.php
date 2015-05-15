@@ -3,7 +3,7 @@
 @section('content')
 <input type="hidden" id="deviceId" value="{{$deviceId}}" />
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     <div class="panel panel-dark">
       <div class="panel-heading"><b>Device Information</b></div>
       <div class="panel-body" id="device-information-panel">
@@ -12,14 +12,14 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-5 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-1">
     <div class="panel panel-dark">
       <div class="panel-heading"><b>Device Data Streams</b></div>
       <div class="panel-body" id="data-stream-panel">
       </div>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div class="panel panel-dark">
       <div class="panel-heading"><b>Device Commands</b></div>
       <div class="panel-body" id="command-panel"></div>

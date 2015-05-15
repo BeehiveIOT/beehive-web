@@ -238,7 +238,7 @@
       var arguments = getArguments.call(this);
       return (
         <div className="row">
-          <div className="col-md-6 col-md-offset-3">
+          <div className="col-md-8 col-md-offset-2">
             <div className="panel panel-dark">
               <div className="panel-heading"><b>Command Information</b></div>
               <div className="panel-body">

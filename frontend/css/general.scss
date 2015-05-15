@@ -3,13 +3,14 @@
 body {
   background-color: #EDEDED
 }
+
 .wrapper {
   margin: 70px 16px 10px 16px;
 }
 
 #wrapper {
   padding-left: 0;
-  margin-top: 100px;
+  margin-top: 80px;
   /* For content animation when toggle */
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -18,16 +19,16 @@ body {
 }
 
 #wrapper.toggled {
-  padding-left: 220px;
+  padding-left: 250px;
 }
 
 #sidebar-wrapper {
   z-index: 1000;
   position: fixed;
-  left: 220px;
+  left: 250px;
   width: 0;
   height: 100%;
-  margin-left: -220px;
+  margin-left: -250px;
   overflow-y: auto;
   background: #3E5050;
   -webkit-transition: all 0.5s ease;
@@ -37,7 +38,7 @@ body {
 }
 
 #wrapper.toggled #sidebar-wrapper {
-  width: 220px;
+  width: 250px;
 }
 
 #page-content-wrapper {
@@ -48,15 +49,16 @@ body {
 
 #wrapper.toggled #page-content-wrapper {
   position: absolute;
-  margin-right: -220px;
+  margin-right: -250px;
 }
 
-/* Sidebar Styles */
-
+/**
+ * Sidebar Styles
+ */
 .sidebar-nav {
-  position: absolute;
-  top: 0;
-  width: 220px;
+  // position: absolute;
+  // top: 0;
+  width: 250px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -65,12 +67,13 @@ body {
 .sidebar-nav li {
   text-indent: 20px;
   line-height: 40px;
+  border-bottom: 1px solid #626464;
 }
 
 .sidebar-nav li a {
   display: block;
   text-decoration: none;
-  color: #999999;
+  color: $light-gray;
 }
 
 .sidebar-nav li a:hover {
@@ -101,7 +104,7 @@ body {
 
 @media(min-width:768px) {
   #wrapper {
-    padding-left: 220px;
+    padding-left: 250px;
   }
 
   #wrapper.toggled {
@@ -109,7 +112,7 @@ body {
   }
 
   #sidebar-wrapper {
-    width: 220px;
+    width: 250px;
   }
 
   #wrapper.toggled #sidebar-wrapper {

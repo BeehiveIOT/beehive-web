@@ -10,7 +10,7 @@
 @else
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
     rel="stylesheet">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
     rel="stylesheet">
 @endif
   <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
@@ -21,32 +21,8 @@
 @include('widgets.navbar')
 
 <div id="wrapper">
-<!-- Sidebar -->
-  <div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li>
-        <a href="#">Dashboard</a>
-      </li>
-      <li>
-        <a href="#">Manage Devices</a>
-      </li>
-      <li>
-        <a href="#">Manage Templates</a>
-      </li>
-      <li>
-        <a href="#">Shared Devices</a>
-      </li>
-      <li>
-        <a href="#">History Data</a>
-      </li>
-      <li>
-        <a href="#">Services</a>
-      </li>
-      <li>
-        <a href="#">Contact</a>
-      </li>
-    </ul>
-  </div>
+  <!-- Sidebar -->
+  @include('widgets.sidebar')
   <!-- /#sidebar-wrapper -->
 
   <!-- Page Content -->
