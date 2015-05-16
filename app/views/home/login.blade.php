@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-  <div class="col-md-3 col-md-offset-4">
+  <div class="col-md-4 col-md-offset-2">
     <div class="form-group">
     {{Form::open()}}
       {{Form::text('username',Input::old('username'), [

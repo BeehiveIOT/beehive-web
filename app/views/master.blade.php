@@ -21,10 +21,11 @@
 @include('widgets.navbar')
 
 <div id="wrapper">
+@if(Auth::check())
   <!-- Sidebar -->
   @include('widgets.sidebar')
   <!-- /#sidebar-wrapper -->
-
+@endif
   <!-- Page Content -->
   <div id="page-content-wrapper">
     <div class="container-fluid">
