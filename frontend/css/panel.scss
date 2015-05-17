@@ -18,21 +18,21 @@
  * Extended from bootstrap default panel
  */
 .panel-dark {
-  border: 1px #AEAEAE solid;
+  border: 0px #000 solid;
   -webkit-box-shadow: 2px 2px 3px 0px rgba(48, 51, 50, 0.4);
 -moz-box-shadow:    2px 2px 3px 0px rgba(48, 51, 50, 0.4);
 box-shadow:         2px 2px 3px 0px rgba(48, 51, 50, 0.4);
 }
 .panel-dark > .panel-heading {
   color: #fff;
-  background-color: #3E5050;
-  border-color: #AEAEAE;
+  background-color: #2B3E3E;
+  border-color: #555;
 }
 .panel-dark > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ddd;
 }
 .panel-dark > .panel-body {
-  // background-color: #EFEFEF;
+  background-color: #f9f9f9;
 }
 .panel-dark > .panel-heading .badge {
   color: #f5f5f5;

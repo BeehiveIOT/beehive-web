@@ -1,12 +1,13 @@
 @import '_variables';
 @import '_mixins';
-/**
- * green - button
- */
+
+$btnLightBackground: #167AAE;
+$btnLightBorder: #fff;
+
 .btn-light {
   color: $white;
-  background-color: $btn-light-a;
-  border-color: $observatory;
+  background-color: $btnLightBackground;
+  border-color: $btnLightBorder;
 }
 
 .btn-light:hover,
@@ -15,8 +16,8 @@
 .btn-light.active,
 .open .dropdown-toggle.btn-light {
   color: $white;
-  background-color: $btn-light-a;
-  border-color: $observatory;
+  background-color: $btnLightBackground;
+  border-color: $btnLightBorder;
 }
 
 .btn-light:active,
@@ -40,8 +41,8 @@ fieldset[disabled] .btn-light:active,
 .btn-light.disabled.active,
 .btn-light[disabled].active,
 fieldset[disabled] .btn-light.active {
-  background-color: $btn-light-a;
-  border-color: $observatory;
+  background-color: $btnLightBackground;
+  border-color: $btnLightBorder;
 }
 
 .btn-light .badge {
