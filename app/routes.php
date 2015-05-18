@@ -46,14 +46,14 @@ Route::group(['before'=>'auth'], function() {
     // Route used to enable html5 history api with reactjs
     Route::any('dashboard/templates/{all?}', ['uses' => 'TemplateController@page'])
         ->where('all', '.*');
-
     Route::resource('templates', 'TemplateController', $except);
-
     Route::resource('templates.commands', 'CommandController', $except);
-
     Route::resource('templates.commands.arguments', 'ArgumentController', $except);
-
     Route::resource('templates.datastreams', 'DataStreamController', $except);
+
+    Route::any('dashboard/permissions/{all?}', ['uses'=>'DevicePermissionController@page'])
+        ->where('all', '.*');
+    Route::resource('devices.permissions', 'DevicePermissionController', $except);
 
     /**
      * All this is PoC stuff gonna be removed :3

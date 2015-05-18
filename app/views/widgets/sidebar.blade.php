@@ -14,7 +14,9 @@
       <a href="{{url('dashboard/devices')}}">Manage Devices</a>
     </li>
     <li>
-      <a href="#">Device Permissions</a>
+      <a href="{{url('dashboard/permissions')}}">
+        Device Permissions
+      </a>
     </li>
     <li>
       <a href="#">Device Data Archive</a>

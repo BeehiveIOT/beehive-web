@@ -35,12 +35,13 @@
           <td>{item.data_type}</td>
           <td>{item.display_type}</td>
           <td>
-            <Link to="editDataStream" params={params}>
+            <Link to="editDataStream" className="btn btn-light" params={params}>
               <i className="fa fa-pencil"></i>
             </Link>
           </td>
           <td>
-            <a href="javascript:(0)" data-stream-id={item.id} data-index={idx}
+            <a href="javascript:(0)" className="btn btn-light"
+              data-stream-id={item.id} data-index={idx}
               onClick={removeDataStream.bind(this)}>
               <i className="fa fa-trash-o"></i>
             </a>

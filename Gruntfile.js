@@ -43,6 +43,16 @@ module.exports = function(grunt) {
         ],
         dest: './public/assets/js/devicePanel.js'
       },
+      permissions: {
+        src: [
+          './public/assets/js/permissions/actions/*.js',
+          './public/assets/js/permissions/stores/*.js',
+          './public/assets/js/permissions/components/*.js',
+          './public/assets/js/permissions/views/*.js',
+          './public/assets/js/permissions/*.js',
+        ],
+        dest: './public/assets/js/permissions.js'
+      },
       templates2: {
         src: [
           './public/assets/js/templates2/actions/*.js',
@@ -131,6 +141,12 @@ module.exports = function(grunt) {
           cwd: './frontend/js/templates2',
           src: ['**/*.jsx'],
           dest: './public/assets/js/templates2',
+          ext: '.js'
+        }, {
+          expand: true,
+          cwd: './frontend/js/permissions',
+          src: ['**/*.jsx'],
+          dest: './public/assets/js/permissions',
           ext: '.js'
         }]
       }

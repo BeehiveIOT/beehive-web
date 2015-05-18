@@ -32,12 +32,13 @@
           <td>{item.name}</td>
           <td>{item.short_cmd}</td>
           <td>
-            <Link to="editCommand" params={params}>
+            <Link to="editCommand" className="btn btn-light" params={params}>
               <i className="fa fa-pencil"></i>
             </Link>
           </td>
           <td>
-            <a href="javascript:(0)" data-command-id={item.id} data-index={idx}
+            <a href="javascript:(0)" className="btn btn-light"
+              data-command-id={item.id} data-index={idx}
               onClick={removeCommand.bind(this)}>
               <i className="fa fa-trash-o"></i>
             </a>

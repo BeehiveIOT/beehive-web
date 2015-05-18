@@ -3,35 +3,38 @@
     <div class="panel panel-dark">
       <div class="panel-heading"><b>Manage Your Devices</b></div>
       <div class="panel-body">
-
         <div class="row">
-          <div class="col-md-4">
-            <h4>Filter by Template</h4>
-          </div>
           <div class="col-md-4">
             <a href="#/create" class="btn btn-light">
               <i class="fa fa-plus"></i> Add new Device
             </a>
+            <br><br>
           </div>
         </div>
-        <br>
         <div class="row">
           <div class="col-md-12">
-            <select class="form-control" ng-model="template" ng-change="templateChange()"
-              ng-options="template.name for template in templates">
-            </select>
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-1 control-label">Template</label>
+                <div class="col-sm-10">
+                  <select class="form-control" ng-model="template" ng-change="templateChange()"
+                    ng-options="template.name for template in templates">
+                  </select>
+                </div>
+              </div>
+            </div>
+            <ul class="device-list">
+              <li ng-repeat="device in fdevices =  (devices|filter:search)">
+                <a href="/dashboard/devices/{{device.id}}">
+                  <h4>{{device.name}}</h4>
+                  <span>{{device.description}}</span>
+                  <img src="/uploads/avatars/device.png" alt="">
+                </a>
+              </li>
+              <li ng-hide="fdevices.length">No devices</li>
+            </ul>
           </div>
         </div>
-        <ul class="device-list">
-          <li ng-repeat="device in fdevices =  (devices|filter:search)">
-            <a href="/dashboard/devices/{{device.id}}">
-              <h4>{{device.name}}</h4>
-              <span>{{device.description}}</span>
-              <img src="/uploads/avatars/device.png" alt="">
-            </a>
-          </li>
-          <li ng-hide="fdevices.length">No devices</li>
-        </ul>
       </div>
     </div>
   </div>
