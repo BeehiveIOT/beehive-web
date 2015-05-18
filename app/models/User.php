@@ -21,14 +21,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password', 'remember_token', 'pivot');
+	protected $hidden = [
+		'password', 'remember_token',
+		'created_at', 'updated_at'];
 
 	/**
 	 * Returns the device intances in which user is admin
 	 * @return Eloquent many to many relation
 	 */
 	public function devices() {
-		return $this->belongsToMany('Device', 'device_admin');
+		return $this->belongsToMany('Device', 'device_admin')
+			->withPivot('can_read', 'can_update', 'can_delete', 'user_id');
 	}
 
 	/**

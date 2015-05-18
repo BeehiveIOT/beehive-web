@@ -39,6 +39,9 @@
           </a>
         </li>
       @else
+        <li>
+          <a href="#">API Docs</a>
+        </li>
         <li class="dropdown">
         <a href="" class="dropdown-toggle" data-toggle="dropdown">
           <img id="navbar-profile" src="{{ViewHelper::avatar(Auth::user()->picture_url)}}" width="35px" height="35px" class='img-circle'>

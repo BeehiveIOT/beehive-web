@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Beehive\Repo\GenericRepository;
 use Beehive\Repo\Template\TemplateRepo;
 use \GUID;
+use \DB;
 
 class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
     protected $templateRepo;
@@ -80,5 +81,46 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
         $device->save();
 
         return $device;
+    }
+
+    public function isAdmin($id, $userId)
+    {
+        $data = DB::table('device_admin')
+            ->where('device_id', '=', $id)
+            ->where('user_id', '=', $userId)
+            ->get();
+
+        if (count($data) > 0) {
+            return $data[0];
+        }
+        return null;
+    }
+
+    public function getPermissions($id, array $extra=[])
+    {
+        $result = [];
+        $device = parent::get($id);
+        $admins = $device->administrators()->get();
+        $userId = null;
+        if (isset($extra['userId'])) {
+            $userId = $extra['userId'];
+        }
+
+        foreach($admins as $admin) {
+            $item = [
+                'user_id' => $admin->id,
+                'name' => $admin->name,
+                'can_read' => $admin->pivot->can_read == 1 ? true : false,
+                'can_update' => $admin->pivot->can_update == 1 ? true : false,
+                'can_delete' => $admin->pivot->can_delete == 1 ? true : false,
+                'owner' => false
+            ];
+            if ($userId) {
+                $item['owner'] = $userId == $admin->id;
+            }
+
+            $result[] = $item;
+        }
+        return $result;
     }
 }
