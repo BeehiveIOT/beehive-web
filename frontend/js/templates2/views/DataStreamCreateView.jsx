@@ -65,8 +65,9 @@
     render: function() {
       var options = [<option value="line">Lines</option>,<option value="bar">Bars</option>];
       if (this.state.dataType === 'location') {
-        console.log('foob');
         options = <option value="map">Map</option>;
+      } else if (this.state.dataType === 'base64image') {
+        options = <option value="picture">Image View</option>;
       }
       return (
         <div className="row">
@@ -85,6 +86,7 @@
                       <label>Data Type</label>
                       <select tabIndex="3" ref="dataType" className="form-control" value={this.state.dataType} onChange={dataTypeChange.bind(this)}>
                         <option value="number">Number</option>
+                        <option value="base64image">Base64 Image</option>
                         <option value="location">Location</option>
                       </select>
                     </div>

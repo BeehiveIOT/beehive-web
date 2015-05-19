@@ -7,6 +7,8 @@
         return <BarChart ref={topic} />
       case 'map':
         return <Map ref={topic} />
+      case 'picture':
+        return <PictureChart ref={topic} />
       return <span></span>;
     }
   }

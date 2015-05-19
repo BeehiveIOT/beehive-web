@@ -7,8 +7,8 @@ class DataStreamValidator extends GenericValidator
     protected $rules = [
         'name' => 'required|min:3',
         'topic_name' => 'required',
-        'data_type' => 'in:number,string,location',
-        'display_type' => 'in:line,bar,map'
+        'data_type' => 'in:number,string,location,base64image',
+        'display_type' => 'in:line,bar,map,picture'
     ];
 
     public function passes()
@@ -20,6 +20,11 @@ class DataStreamValidator extends GenericValidator
         if ($this->data['data_type'] === 'location') {
             if ($this->data['display_type'] !== 'map') {
                 // $this->errors = ['map error'];
+                return false;
+            }
+        }
+        else if ($this->data['data_type'] === 'base64image') {
+            if ($this->data['display_type'] !== 'picture') {
                 return false;
             }
         }
