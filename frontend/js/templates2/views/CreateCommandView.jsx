@@ -195,13 +195,14 @@
     ],
     onCommandChange: function(action, data) {
       if (action === 'commandCreated') {
-        this.transitionTo('app');
+        this.transitionTo('app', null, { _: 'c', id: data.template_id });
       } else if (action === 'commandUpdated') {
         this.refs.name.getDOMNode().value = data.name;
         this.refs.short_cmd.getDOMNode().value = data.short_cmd;
         this.setState({ cmd_type: data.cmd_type });
         $(this.refs.spinner.getDOMNode()).hide();
         this.refs.btnSave.getDOMNode().disabled = false;
+        this.transitionTo('app', null, { _: 'c', id: data.template_id });
       } else if (action === 'commandRead') {
         this.refs.name.getDOMNode().value = data.name;
         this.refs.short_cmd.getDOMNode().value = data.short_cmd;
@@ -236,6 +237,7 @@
       var argumentValues = getArgumentValues.call(this);
       var commandPlaceholder = getCommandPlaceholder.call(this);
       var arguments = getArguments.call(this);
+      var query = { _:'c', id:this.getParams().templateId };
       return (
         <div className="row">
           <div className="col-md-8 col-md-offset-2">
@@ -293,7 +295,7 @@
                   Save Changes
                 </button>
                 &nbsp;&nbsp;&nbsp;
-                <Link to='app' title="Cancel">Cancel</Link><br/><br/>
+                <Link to='app' query={query} title="Cancel">Cancel</Link><br/><br/>
                 <b>Argument List</b>
                 <table className="table table-condensed">
                   <thead>

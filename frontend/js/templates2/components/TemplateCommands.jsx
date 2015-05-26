@@ -15,7 +15,7 @@
     var templateId = this.props.template.id;
     var index = e.currentTarget.dataset.index;
 
-    CommandActions.delete(templateId, commandId);
+    CommandActions.delete(templateId, commandId, index);
   }
 
   function getCommandRows() {

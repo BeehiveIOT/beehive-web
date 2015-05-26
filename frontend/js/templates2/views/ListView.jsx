@@ -1,7 +1,24 @@
 (function() {
   var Link = ReactRouter.Link;
+  var State = ReactRouter.State;
+
+  function expandTemplate() {
+    var query = this.getQuery();
+    if (!query._ || !query.id) { return; }
+
+    var el = $(this.refs['template_'+query.id].getDOMNode());
+    if (query._ === 'c') {
+      this.refs['template_'+query.id].expandCommands();
+      $('body').animate({ scrollTop: el.offset().top - 100, scrollLeft: 0 });
+    } else if (query._ === 'ds') {
+      this.refs['template_'+query.id].expandDataStreams();
+      $('body').animate({ scrollTop: el.offset().top - 100, scrollLeft: 0 });
+    }
+  }
+
   var ListView = React.createClass({
     mixins: [
+      State,
       Reflux.listenTo(window.TemplateStore, 'onTemplateChange'),
     ],
     getInitialState: function() {
@@ -25,15 +42,17 @@
     onTemplateChange: function(action, data) {
       if (action === 'templatesLoaded') {
         this.setState({templates: data});
+        expandTemplate.call(this);
       } else if (action === 'templateUpdated'){
         this.onUpdate(data);
       }
     },
     render: function() {
       var templates = this.state.templates.map(function(item) {
+        var refId = 'template_' + item.id
         return (
           <li>
-            <Template template={item} onUpdate={this.onUpdate} />
+            <Template ref={refId} template={item} onUpdate={this.onUpdate} />
           </li>
         );
       });

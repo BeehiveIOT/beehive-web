@@ -1,4 +1,5 @@
 (function() {
+  var Navigation = ReactRouter.Navigation;
   var Link = ReactRouter.Link;
   var State = ReactRouter.State;
 
@@ -32,6 +33,7 @@
   var DataStreamCreateView = React.createClass({
     mixins: [
       State,
+      Navigation,
       Reflux.listenTo(DataStreamModelStore, 'onDataStreamChange')
     ],
     onDataStreamChange: function(data, res) {
@@ -46,6 +48,10 @@
 
         $(this.refs.spinner.getDOMNode()).hide();
         this.refs.btnSave.getDOMNode().disabled = false;
+
+        if (res.method !== 'GET') {
+          this.transitionTo('app', null, { _: 'ds', id: data.template_id });
+        }
       }
     },
     getInitialState: function() {
@@ -69,6 +75,8 @@
       } else if (this.state.dataType === 'base64image') {
         options = <option value="picture">Image View</option>;
       }
+
+      var query = {_:'ds', id: this.getParams().templateId };
       return (
         <div className="row">
           <div className="col-md-8 col-md-offset-2">
@@ -121,7 +129,7 @@
                   Save Changes
                 </button>
                 &nbsp;&nbsp;&nbsp;
-                <Link to='app' title="Cancel">Cancel</Link><br/><br/>
+                <Link to='app' query={query} title="Cancel">Cancel</Link><br/><br/>
               </div>
             </div>
           </div>

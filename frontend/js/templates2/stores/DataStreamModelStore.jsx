@@ -9,21 +9,21 @@
       var url = '/templates/' + templateId + '/datastreams/' + dataStreamId;
       $http.get(url).then(function(res) {
         this.dataStream = res;
-        this.trigger(this.dataStream, { code: 200 });
+        this.trigger(this.dataStream, { code: 200, method: 'GET' });
       }.bind(this), function(err) {});
     },
     onCreate: function(templateId, data) {
       var url = '/templates/' + templateId + '/datastreams';
       $http.post(url, data).then(function(res) {
         this.dataStream = res;
-        this.trigger(this.dataStream, { code: 200 });
+        this.trigger(this.dataStream, { code: 200, method: 'POST' });
       }.bind(this), function(err) {})
     },
     onUpdate: function(templateId, dataStreamId, data) {
       var url = '/templates/' + templateId + '/datastreams/' + dataStreamId;
       $http.put(url, data).then(function(res) {
         this.dataStream = res;
-        this.trigger(this.dataStream, { code: 200 });
+        this.trigger(this.dataStream, { code: 200, method: 'PUT' });
       }.bind(this), function(err) {});
     }
   });

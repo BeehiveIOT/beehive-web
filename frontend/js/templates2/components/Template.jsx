@@ -30,6 +30,12 @@
         contentType: ''
       };
     },
+    expandCommands: function() {
+      this.setState({ contentType: 'commands' });
+    },
+    expandDataStreams: function() {
+      this.setState({ contentType: 'dataStreams' });
+    },
     render: function() {
       var contentBody = getContentBody.call(this);
       return (
