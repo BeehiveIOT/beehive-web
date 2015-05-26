@@ -56,6 +56,7 @@
           </li>
         );
       });
+      if (templates.length === 0) { templates = 'No Templates'; }
       return (
         <div className="row">
           <div className="col-md-8 col-md-offset-2">
