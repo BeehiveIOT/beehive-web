@@ -37,7 +37,7 @@
             </Link>
           </td>
           <td>
-            <a href="javascript:(0)" className="btn btn-light"
+            <a href="javascript:void(0)" className="btn btn-light"
               data-command-id={item.id} data-index={idx}
               onClick={removeCommand.bind(this)}>
               <i className="fa fa-trash-o"></i>

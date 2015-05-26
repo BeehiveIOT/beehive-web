@@ -149,7 +149,7 @@
           <td>{item.minimum}</td>
           <td>{item.maximum}</td>
           <td>
-            <a href="javascript:(0)" data-argument-id={item.id} data-index={idx} onClick={removeArgument.bind(this)}>
+            <a href="javascript:void(0)" data-argument-id={item.id} data-index={idx} onClick={removeArgument.bind(this)}>
               <i className="fa fa-trash-o"></i>
             </a>
           </td>

@@ -53,7 +53,7 @@
                   Save Changes
                 </button>
                 &nbsp;&nbsp;&nbsp;
-                <a href="javascript:(0)" onClick={hide.bind(this)}>Cancel</a>
+                <a href="javascript:void(0)" onClick={hide.bind(this)}>Cancel</a>
               </div>
             </div>
           </div>

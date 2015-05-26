@@ -44,23 +44,23 @@
               </a>
               &nbsp;&nbsp;
               <div className="dropdown"  style={{display:'inline-block'}}>
-                <a href="javascript:(0)" data-toggle="dropdown"
+                <a href="javascript:void(0)" data-toggle="dropdown"
                   title="Commands"><i className="fa fa-cogs"></i></a>
                 <ul className="dropdown-menu" role="menu" aria-labelledby="dLabel">
                   <li>
-                    <a href="javascript:(0)" onClick={changeContentBody.bind(this)} data-content='commands'>
+                    <a href="javascript:void(0)" onClick={changeContentBody.bind(this)} data-content='commands'>
                       Commands
                     </a>
                   </li>
                   <li>
-                    <a href="javascript:(0)" onClick={changeContentBody.bind(this)} data-content='dataStreams'>
+                    <a href="javascript:void(0)" onClick={changeContentBody.bind(this)} data-content='dataStreams'>
                       Data Streams
                     </a>
                   </li>
                 </ul>
               </div>
               &nbsp;&nbsp;
-              <a href="javascript:(0)" title="Remove Template"
+              <a href="javascript:void(0)" title="Remove Template"
                 ng-click="delete($index)"><i className="fa fa-trash-o"></i></a>
             </div>
           </div>
