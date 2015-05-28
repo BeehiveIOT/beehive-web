@@ -9,6 +9,8 @@
         return <Map ref={topic} />
       case 'picture':
         return <PictureChart ref={topic} />
+      case 'static':
+        return <StaticValue ref={topic} />
       return <span></span>;
     }
   }
@@ -19,10 +21,19 @@
       }
     },
     render: function(){
-      var dataStreamDisplay = getDataStreamDisplay(this.props.dataStream.display_type, this.props.topic);
+      var dataStream = this.props.dataStream,
+        dataStreamDisplay = getDataStreamDisplay(dataStream.display_type, dataStream.topic),
+        units = <span className="stream-unit">
+          {dataStream.unit ? '[' + dataStream.unit + ']' : ''}
+        </span>;
+
       return (
-        <div>
-          <h3>{this.props.dataStream.name}</h3>
+        <div className="static-text-view">
+          <p className="stream-name">
+            {this.props.dataStream.name}
+            &nbsp;
+            {units}
+          </p>
           {dataStreamDisplay}
         </div>
       );

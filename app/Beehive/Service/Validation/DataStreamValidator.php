@@ -8,7 +8,7 @@ class DataStreamValidator extends GenericValidator
         'name' => 'required|min:3',
         'topic_name' => 'required',
         'data_type' => 'in:number,string,location,base64image',
-        'display_type' => 'in:line,bar,map,picture'
+        'display_type' => 'in:line,bar,map,picture,static'
     ];
 
     public function passes()

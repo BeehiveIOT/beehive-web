@@ -3,6 +3,24 @@
   var Link = ReactRouter.Link;
   var State = ReactRouter.State;
 
+  function getSelectOptions() {
+    var options = [
+      <option value="line">Lines</option>,
+      <option value="bar">Bars</option>,
+      <option value="static">Static Text View</option>
+    ];
+    if (this.state.dataType === 'location') {
+      options = [
+        <option value="map">Map</option>,
+        <option value="static">Static Text View</option>,
+      ];
+    } else if (this.state.dataType === 'base64image') {
+      options = <option value="picture">Image View</option>;
+    }
+
+    return options;
+  }
+
   function dataTypeChange(e) {
     var value = e.currentTarget.value;
     this.setState({dataType: value});
@@ -69,12 +87,7 @@
       }
     },
     render: function() {
-      var options = [<option value="line">Lines</option>,<option value="bar">Bars</option>];
-      if (this.state.dataType === 'location') {
-        options = <option value="map">Map</option>;
-      } else if (this.state.dataType === 'base64image') {
-        options = <option value="picture">Image View</option>;
-      }
+      var options = getSelectOptions.call(this);
 
       var query = {_:'ds', id: this.getParams().templateId };
       return (
