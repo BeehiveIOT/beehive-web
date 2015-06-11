@@ -63,7 +63,11 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
         $device->save();
 
         // $user_id as default administrator
-        $device->administrators()->attach($user_id);
+        $device->administrators()->attach($user_id, [
+            'can_read' => true,
+            'can_edit' => true,
+            'can_execute' => true
+        ]);
 
         return $device;
     }
@@ -110,11 +114,13 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
             $item = [
                 'user_id' => $admin->id,
                 'name' => $admin->name,
+                'username' => $admin->username,
                 'can_read' => $admin->pivot->can_read == 1 ? true : false,
-                'can_update' => $admin->pivot->can_update == 1 ? true : false,
-                'can_delete' => $admin->pivot->can_delete == 1 ? true : false,
+                'can_edit' => $admin->pivot->can_edit == 1 ? true : false,
+                'can_execute' => $admin->pivot->can_execute == 1 ? true : false,
                 'owner' => false
             ];
+            // If userId variable is defined, check if is the device owner
             if ($userId) {
                 $item['owner'] = $userId == $admin->id;
             }

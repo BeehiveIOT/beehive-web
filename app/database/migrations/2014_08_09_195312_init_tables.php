@@ -80,8 +80,8 @@ class InitTables extends Migration {
 		Schema::create('device_admin', function($t) {
 			$t->increments('id');
 			$t->boolean('can_read');
-			$t->boolean('can_update');
-			$t->boolean('can_delete');
+			$t->boolean('can_edit');
+			$t->boolean('can_execute');
 			$t->integer('user_id')->unsigned();
 			$t->integer('device_id')->unsigned();
 			$t->timestamps();

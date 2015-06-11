@@ -31,7 +31,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	public function devices() {
 		return $this->belongsToMany('Device', 'device_admin')
-			->withPivot('can_read', 'can_update', 'can_delete', 'user_id');
+			->withPivot('can_read', 'can_edit', 'can_execute', 'user_id');
 	}
 
 	/**
