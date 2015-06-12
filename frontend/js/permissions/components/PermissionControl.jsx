@@ -1,4 +1,5 @@
 (function() {
+  var Link = ReactRouter.Link;
 
   function onUsernameChange(e) {
     var btnAdd = this.refs.btnAdd.getDOMNode();
@@ -57,11 +58,13 @@
               <input ref="canExecute" type="checkbox" />
             </label>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-3">
             <br />
             <button ref="btnAdd" className="btn btn-light" onClick={addPermission.bind(this)}>
               <i className="fa fa-plus"></i>
             </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <Link to='app' title="Cancel">Go back</Link>
           </div>
         </div>
       );
