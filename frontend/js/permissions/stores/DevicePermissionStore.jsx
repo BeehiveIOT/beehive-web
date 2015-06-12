@@ -15,7 +15,6 @@
       var url = '/devices/' + deviceId + '/permissions';
 
       $http.post(url, data).then(function(res) {
-
         PermissionActions.loadPermissionsByDevice(deviceId);
       }.bind(this), function(err) {
         alert(JSON.stringify(err));
