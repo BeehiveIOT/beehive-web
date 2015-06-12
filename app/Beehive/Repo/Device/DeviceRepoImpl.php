@@ -41,6 +41,7 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
             ->join('device_admin as da', 'da.device_id', '=', 'devices.id')
             ->where('devices.template_id', '=', $templateId)
             ->where('da.user_id', '=', $userId)
+            ->where('da.can_read', '=', true)
             ->get($columns);
     }
 

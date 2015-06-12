@@ -87,13 +87,20 @@ class DeviceController extends BaseController {
 
 	public function update($id)
 	{
+		$userId = Auth::id();
+		if (!$this->deviceRepo->canEdit($id, $userId)) {
+			return Response::json([
+				'status' => 'You cannot edit this device'
+			], 403);
+		}
+
 		$data = Input::only(['name','description', 'is_public']);
 		if (!$this->validator->with($data)->passes()) {
 			return Response::json($this->validator->errors(), 400);
 		}
 
 		try {
-			$extra = ['user_id'=>Auth::id()];
+			$extra = ['user_id'=>$userId];
 			$device = $this->deviceRepo->update($id, $data, $extra);
 
 			return Response::json($device, 200);
@@ -133,7 +140,14 @@ class DeviceController extends BaseController {
 
 	public function executeCommand($id, $commandId)
 	{
-		if (!$device = $this->deviceRepo->getByUser($id, Auth::id())) {
+		$userId = Auth::id();
+		if (!$this->deviceRepo->canExecute($id, $userId)) {
+			return Response::json([
+				'status' => 'You cannot execute commands for this device'
+			], 403);
+		}
+
+		if (!$device = $this->deviceRepo->getByUser($id, $userId)) {
 			return Response::json(['status' => ['Device not found']], 404);
 		}
 		// $templateId = $device->template_id;
@@ -154,5 +168,11 @@ class DeviceController extends BaseController {
 			'command_name' => $command->name,
 			'timestamp' => $timestamp
 		], 200);
+	}
+
+	public function sharedDevices()
+	{
+		$devices = $this->deviceRepo->getSharedDevices(Auth::id());
+		return Response::json($devices, 200);
 	}
 }
