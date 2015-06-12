@@ -44,6 +44,16 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
             ->get($columns);
     }
 
+    public function getSharedDevices($userId, array $columns=['devices.*'])
+    {
+         return $this->model
+            ->join('device_admin as da', 'devices.id', '=', 'da.device_id')
+            ->where('da.user_id', '=', $userId)
+            ->where('da.owner', '=', false)
+            ->get($columns)
+            ->all();
+    }
+
     public function create(array $data, array $extra=[]) {
         $template_id = $data['template_id'];
         $user_id = $extra['user_id'];
