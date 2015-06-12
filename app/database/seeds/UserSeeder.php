@@ -4,16 +4,30 @@ class UserSeeder extends Seeder {
         DB::table('users')->delete();
 
         User::create([
-            'name'=>'Sergio Guillen Mantilla',
-            'username'=>'donkeysharp',
-            'email'=>'serguimant@gmail.com',
+            'name'=>'Dexter Douglas',
+            'username'=>'user1',
+            'email'=>'user1@foobar.com',
             'password'=>Hash::make('12345'),
             'country'=>'BO'
         ]);
         User::create([
-            'name'=>'Fernando Guillen Mantilla',
-            'username'=>'ferdo',
-            'email'=>'fernando@gmail.com',
+            'name'=>'Chui Savedra',
+            'username'=>'user2',
+            'email'=>'user2@gmail.com',
+            'password'=>Hash::make('12345'),
+            'country'=>'BO'
+        ]);
+        User::create([
+            'name'=>'Pedro Perez Pereira',
+            'username'=>'user3',
+            'email'=>'user3@foobar.com',
+            'password'=>Hash::make('12345'),
+            'country'=>'BO'
+        ]);
+        User::create([
+            'name'=>'Juan Salvador Gaviota',
+            'username'=>'user4',
+            'email'=>'user4@foobar.com',
             'password'=>Hash::make('12345'),
             'country'=>'BO'
         ]);

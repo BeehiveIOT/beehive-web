@@ -82,6 +82,7 @@ class InitTables extends Migration {
 			$t->boolean('can_read');
 			$t->boolean('can_edit');
 			$t->boolean('can_execute');
+			$t->boolean('owner');
 			$t->integer('user_id')->unsigned();
 			$t->integer('device_id')->unsigned();
 			$t->timestamps();
