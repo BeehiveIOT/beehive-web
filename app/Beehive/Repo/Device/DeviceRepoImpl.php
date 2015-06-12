@@ -100,6 +100,39 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
         return null;
     }
 
+    public function canRead($id, $userId)
+    {
+        $item = $this->isAdmin($id, $userId);
+        if ($item) {
+            if ($item->can_read) {
+                return $item;
+            }
+        }
+        return null;
+    }
+
+    public function canEdit($id, $userId)
+    {
+        $item = $this->isAdmin($id, $userId);
+        if ($item) {
+            if ($item->can_edit) {
+                return $item;
+            }
+        }
+        return null;
+    }
+
+    public function canExecute($id, $userId)
+    {
+        $item = $this->isAdmin($id, $userId);
+        if ($item) {
+            if ($item->can_execute) {
+                return $item;
+            }
+        }
+        return null;
+    }
+
     public function getPermissions($id, array $extra=[])
     {
         $result = [];
@@ -112,21 +145,49 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
 
         foreach($admins as $admin) {
             $item = [
+                'id' => $admin->pivot->id,
                 'user_id' => $admin->id,
                 'name' => $admin->name,
                 'username' => $admin->username,
                 'can_read' => $admin->pivot->can_read == 1 ? true : false,
                 'can_edit' => $admin->pivot->can_edit == 1 ? true : false,
                 'can_execute' => $admin->pivot->can_execute == 1 ? true : false,
-                'owner' => false
+                'owner' => false,
+                'foobar' => $admins
             ];
-            // If userId variable is defined, check if is the device owner
+            // If userId variable is defined, check if it's device's owner
             if ($userId) {
                 $item['owner'] = $userId == $admin->id;
             }
 
             $result[] = $item;
         }
+        return $result;
+    }
+
+    public function addAdmin($id, array $data=[])
+    {
+        $device = parent::get($id);
+        $userId = $data['user_id'];
+        $data = [
+            'can_read' => $data['can_read'],
+            'can_edit' => $data['can_edit'],
+            'can_execute' => $data['can_execute']
+        ];
+        $device->administrators()->sync([$userId => $data], false);
+        $data['user_id'] = $userId;
+        $data['owner'] = false;
+
+        return $data;
+    }
+
+    public function removeAdmin($deviceId, $userId)
+    {
+        $result = DB::table('device_admin')
+            ->where('user_id', '=', $userId)
+            ->where('device_id', '=', $deviceId)
+            ->delete();
+
         return $result;
     }
 }

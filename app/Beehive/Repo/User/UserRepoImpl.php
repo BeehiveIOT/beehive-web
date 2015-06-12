@@ -10,4 +10,15 @@ class UserRepoImpl extends GenericRepository implements UserRepo
     {
         $this->model = $model;
     }
+
+    public function getByUsername($username)
+    {
+        $users = $this->model
+            ->where('username', '=', $username)
+            ->get();
+        if (count($users) > 0) {
+            return $users[0];
+        }
+        return null;
+    }
 }
