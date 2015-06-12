@@ -6,8 +6,10 @@
     },
     onLoad: function() {
       $http.get('/templates').then(function(res) {
+        res.push({id:'-1', name: '---- Shared Devices ----'});
         this.templates = res;
-        this.trigger(res)
+
+        this.trigger(this.templates)
       }.bind(this), function(err) {})
     }
   });
