@@ -29,6 +29,7 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
         return $this->model
             ->join('device_admin as da', 'devices.id', '=', 'da.device_id')
             ->where('da.user_id', '=', $user_id)
+            ->where('da.can_read', '=', true)
             ->where('devices.id', '=', $device_id)
             ->first($columns);
     }
@@ -50,6 +51,7 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
          return $this->model
             ->join('device_admin as da', 'devices.id', '=', 'da.device_id')
             ->where('da.user_id', '=', $userId)
+            ->where('da.can_read', '=', true)
             ->where('da.owner', '=', false)
             ->get($columns)
             ->all();
