@@ -19,6 +19,7 @@ angular.module("beehive").controller("DeviceListCtrl", [
     };
 
     Template.getAll().then(function(res) {
+      res.data.push({id: -1, name: '---- Shared Devices ----'});
       $scope.templates = res.data;
       if ($scope.templates.length > 0) {
         $scope.template = $scope.templates[0];

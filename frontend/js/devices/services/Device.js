@@ -16,6 +16,10 @@ angular.module('beehive')
         return $http.put('/devices/'+data.id, data);
       },
       getByTemplate: function(templateId) {
+        if (templateId === -1) {
+          return $http.get('/devices/shared');
+        }
+
         return $http.get('/templates/' + templateId + '/devices');
       }
     };
