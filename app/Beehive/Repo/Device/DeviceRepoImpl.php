@@ -66,7 +66,8 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
         $device->administrators()->attach($user_id, [
             'can_read' => true,
             'can_edit' => true,
-            'can_execute' => true
+            'can_execute' => true,
+            'owner' => true
         ]);
 
         return $device;
@@ -96,6 +97,17 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
 
         if (count($data) > 0) {
             return $data[0];
+        }
+        return null;
+    }
+
+    public function isOwner($id, $userId)
+    {
+        $item = $this->isAdmin($id, $userId);
+        if ($item) {
+            if ($item->owner) {
+                return $item;
+            }
         }
         return null;
     }
@@ -133,15 +145,11 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
         return null;
     }
 
-    public function getPermissions($id, array $extra=[])
+    public function getPermissions($id)
     {
         $result = [];
         $device = parent::get($id);
         $admins = $device->administrators()->get();
-        $userId = null;
-        if (isset($extra['userId'])) {
-            $userId = $extra['userId'];
-        }
 
         foreach($admins as $admin) {
             $item = [
@@ -152,13 +160,8 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
                 'can_read' => $admin->pivot->can_read == 1 ? true : false,
                 'can_edit' => $admin->pivot->can_edit == 1 ? true : false,
                 'can_execute' => $admin->pivot->can_execute == 1 ? true : false,
-                'owner' => false,
-                'foobar' => $admins
+                'owner' => $admin->pivot->owner == 1 ? true : false,
             ];
-            // If userId variable is defined, check if it's device's owner
-            if ($userId) {
-                $item['owner'] = $userId == $admin->id;
-            }
 
             $result[] = $item;
         }
@@ -170,13 +173,13 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
         $device = parent::get($id);
         $userId = $data['user_id'];
         $data = [
-            'can_read' => $data['can_read'],
+            'can_read' => true,
             'can_edit' => $data['can_edit'],
-            'can_execute' => $data['can_execute']
+            'can_execute' => $data['can_execute'],
+            'owner' => false,
         ];
         $device->administrators()->sync([$userId => $data], false);
         $data['user_id'] = $userId;
-        $data['owner'] = false;
 
         return $data;
     }
@@ -186,8 +189,21 @@ class DeviceRepoImpl extends GenericRepository implements DeviceRepo {
         $result = DB::table('device_admin')
             ->where('user_id', '=', $userId)
             ->where('device_id', '=', $deviceId)
+            ->get();
+
+        if (count($result) == 0) {
+            return false;
+        }
+
+        if ($result[0]->owner) {
+            return false;
+        }
+
+        DB::table('device_admin')
+            ->where('user_id', '=', $userId)
+            ->where('device_id', '=', $deviceId)
             ->delete();
 
-        return $result;
+        return true;
     }
 }

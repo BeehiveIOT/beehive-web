@@ -26,7 +26,7 @@ class Device extends Eloquent {
     public function administrators()
     {
         return $this->belongsToMany('User', 'device_admin', 'device_id')
-            ->withPivot('can_read', 'can_edit', 'can_execute', 'user_id');
+            ->withPivot('can_read', 'can_edit', 'can_execute', 'owner', 'user_id');
     }
 
 
