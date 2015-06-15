@@ -2,22 +2,22 @@
   function getDataStreamDisplay(displayType, topic) {
     switch(displayType) {
       case 'line':
-        return <LineChart ref={topic} />
+        return <LineChart ref="chart" />
       case 'bar':
-        return <BarChart ref={topic} />
+        return <BarChart ref="chart" />
       case 'map':
-        return <Map ref={topic} />
+        return <Map ref="chart" />
       case 'picture':
-        return <PictureChart ref={topic} />
+        return <PictureChart ref="chart" />
       case 'static':
-        return <StaticValue ref={topic} />
+        return <StaticValue ref="chart"/>
       return <span></span>;
     }
   }
   var DataStream = React.createClass({
     pushData: function(data) {
-      if (this.refs[this.props.topic]) {
-        this.refs[this.props.topic].pushData(data);
+      if (this.refs['chart']) {
+        this.refs['chart'].pushData(data);
       }
     },
     render: function(){
