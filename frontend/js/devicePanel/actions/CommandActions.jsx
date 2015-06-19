@@ -2,6 +2,7 @@
   window.CommandActions = Reflux.createActions([
     'load',
     'setCommands',
-    'execute'
+    'execute',
+    'remove'
   ]);
 }).call(document);

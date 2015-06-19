@@ -27,8 +27,8 @@
           placeholder = 'Range: ['+item.minimum+','+item.maximum+']'
         } else if (item.type === 'string') {
           placeholder = 'Enter a string'
-          if (item.default) {
-            defaultValue = item.default;
+          if (item['default']) {
+            defaultValue = item['default'];
           }
         }
 

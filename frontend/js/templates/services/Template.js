@@ -16,7 +16,7 @@ angular.module('beehive')
         return $http.post('/templates', data);
       },
       delete: function(templateId) {
-        return $http.delete('/templates/'+templateId);
+        return $http.remove('/templates/'+templateId);
       },
       getCommand: function(commandId, templateId) {
         return $http.get('/templates/'+templateId+'/commands/'+commandId);
@@ -28,13 +28,13 @@ angular.module('beehive')
         return $http.put('/templates/'+templateId+'/commands/'+command.id);
       },
       deleteCommand: function(commandId, templateId) {
-        return $http.delete('/templates/'+templateId+'/commands/'+command.id);
+        return $http.remove('/templates/'+templateId+'/commands/'+command.id);
       },
       createArgument: function(templateId, commandId, data) {
         return $http.post('/templates/'+templateId+'/commands/'+commandId+'/arguments', data);
       },
       deleteArgument: function(templateId, commandId, argumentId) {
-        return $http.delete('/templates/'+templateId+'/commands/'+commandId+'/arguments/'+argumentId);
+        return $http.remove('/templates/'+templateId+'/commands/'+commandId+'/arguments/'+argumentId);
       }
     };
   }

@@ -40,9 +40,9 @@
         this.trigger(actions.COMMAND_UPDATED, res);
       }.bind(this), function(err) {});
     },
-    onDelete: function(templateId, commandId, index) {
+    onRemove: function(templateId, commandId, index) {
       var url = '/templates/' + templateId + '/commands/' + commandId;
-      $http.delete(url, {}).then(function(res) {
+      $http.remove(url, {}).then(function(res) {
         this.commands.splice(index, 1);
         this.trigger(actions.COMMANDS_LOADED, this.commands);
       }.bind(this), function(err) {});
@@ -55,7 +55,7 @@
     },
     onDeleteArgument: function(templateId, commandId, argumentId, index) {
       var url = '/templates/' + templateId + '/commands/' + commandId + '/arguments/' + argumentId;
-      $http.delete(url, {}).then(function(res) {
+      $http.remove(url, {}).then(function(res) {
         this.trigger(actions.ARGUMENT_DELETED, index);
       }.bind(this), function(err){});
     }

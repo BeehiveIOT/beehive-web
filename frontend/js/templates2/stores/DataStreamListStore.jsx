@@ -14,7 +14,7 @@
     },
     onRemove: function(templateId, dataStreamId, index) {
       var url = '/templates/' + templateId + '/datastreams/' + dataStreamId;
-      $http.delete(url, {}).then(function(res) {
+      $http.remove(url, {}).then(function(res) {
         this.dataStreams.splice(index, 1);
         this.trigger(this.dataStreams);
       }.bind(this), function(err) {})

@@ -22,7 +22,7 @@
     },
     onRemovePermission: function(deviceId, userId) {
       var url = '/devices/' + deviceId + '/permissions/' + userId;
-      $http.delete(url).then(function(res) {
+      $http.remove(url).then(function(res) {
         PermissionActions.loadPermissionsByDevice(deviceId);
       }.bind(this), function(err) { });
     }

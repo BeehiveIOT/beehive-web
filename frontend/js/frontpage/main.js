@@ -35,7 +35,7 @@
     put: function(url, data) {
       return getHttpRequest(url, 'PUT', data);
     },
-    delete: function(url, data) {
+    remove: function(url, data) {
       return getHttpRequest(url, 'DELETE', data);
     }
   };

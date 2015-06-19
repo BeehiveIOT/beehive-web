@@ -89,7 +89,7 @@
 
     var data = {
       name: argName, type: argType,
-      default: defaultValue, maximum: maxValue, minimum: minValue
+      'default': defaultValue, maximum: maxValue, minimum: minValue
     };
 
     return data;
@@ -145,7 +145,7 @@
           <td>{idx+1}</td>
           <td>{item.name}</td>
           <td>{item.type}</td>
-          <td>{item.default}</td>
+          <td>{item['default']}</td>
           <td>{item.minimum}</td>
           <td>{item.maximum}</td>
           <td>
