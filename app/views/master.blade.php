@@ -67,6 +67,8 @@
 @else
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 @endif
+<script src={{asset('assets/vendors/js/es5-shim.min.js')}}></script>
+<script src={{asset('assets/vendors/js/es5-sham.min.js')}}></script>
 <script src="{{asset('assets/vendors/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript">
   $("#menu-toggle").click(function(e) {
